@@ -16,10 +16,6 @@ steps:
   - name: "gcr.io/cloud-builders/npm"
     args: ["ci"]
     dir: "frontend/functions"
-  # Test Functions
-  - name: "gcr.io/cloud-builders/npm"
-    args: ["run", "lint"]
-    dir: "frontend/functions"
 
   # Deploy
   - name: "gcr.io/$PROJECT_ID/firebase"
