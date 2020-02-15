@@ -1,21 +1,21 @@
 steps:
   # Install
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['ci']
-    dir: 'backend'
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["ci"]
+    dir: "backend"
 
   # Test
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['run', 'lint']
-    dir: 'backend'
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["run", "lint"]
+    dir: "backend"
 
   # Build
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['run', 'build']
-    dir: 'backend'
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["run", "build"]
+    dir: "backend"
 
   # Deploy
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy']
-    dir: 'backend/build'
-timeout: '900s'
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy"]
+    dir: "backend/build"
+timeout: "900s"
