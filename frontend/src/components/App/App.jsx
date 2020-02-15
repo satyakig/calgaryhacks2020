@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import logo from '../../assets/logo.svg';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import AdminLayout from 'layouts/Admin';
+import { initializeApp } from 'lib/Firebase';
 import './App.scss';
-import { initializeApp } from '../../lib/Firebase';
 
 const App = () => {
   useEffect(() => {
@@ -10,22 +11,15 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/components/App/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route
+        path="/admin"
+        render={(props) => {
+          return <AdminLayout {...props} />;
+        }}
+      />
+      <Redirect from="/" to="/admin/dashboard" />
+    </Switch>
   );
 };
 

@@ -7,7 +7,12 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/css/animate.min.css';
+import './assets/sass/light-bootstrap-dashboard-react.scss?v=1.3.0';
+import './assets/css/demo.css';
+import './assets/css/pe-icon-7-stroke.css';
 
 import App from './components/App/App';
 import combinedReducer from './redux/combinedReducer';
@@ -35,7 +40,7 @@ const render = (Component) => {
   // eslint-disable-next-line react/no-render-return-value
   return ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter basename="">
+      <BrowserRouter basename="/">
         <Component />
       </BrowserRouter>
     </Provider>,
