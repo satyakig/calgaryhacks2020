@@ -1,0 +1,91 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": ["eslint:recommended", "google", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier", "import"],
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "no-useless-constructor": "off",
+    "no-confusing-arrow": [
+      "error",
+      {
+        "allowParens": false
+      }
+    ],
+    "no-mixed-operators": [
+      "error",
+      {
+        "groups": [
+          ["&", "|", "^", "~", "<<", ">>", ">>>"],
+          ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+          ["&&", "||"],
+          ["in", "instanceof"]
+        ],
+        "allowSamePrecedence": true
+      }
+    ],
+    "arrow-parens": ["error", "always"],
+    "arrow-body-style": ["error", "always"],
+    "no-var": "error",
+    "prefer-const": "error",
+    "object-curly-newline": [
+      "error",
+      {
+        "consistent": true
+      }
+    ],
+    "curly": ["error", "all"],
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allowAfterThis": true,
+        "allowAfterSuper": true
+      }
+    ],
+    "no-unused-vars": "error",
+    "prefer-template": "error",
+    "no-useless-concat": "error",
+    "import/first": ["error", "absolute-first"],
+    "import/newline-after-import": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
+    "import/no-duplicates": "error",
+    "import/no-cycle": "error",
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "import/no-useless-path-segments": "error",
+    "no-lonely-if": "error",
+    "no-unused-expressions": "error",
+    "no-shadow": "error",
+    "no-param-reassign": "error",
+    "no-dupe-args": "error",
+    "no-duplicate-case": "error",
+    "no-fallthrough": "error",
+    "no-await-in-loop": "error",
+    "no-use-before-define": "error",
+    "no-multiple-empty-lines": "error",
+    "no-nested-ternary": "error",
+    "require-jsdoc": "off",
+    "valid-jsdoc": "off"
+  }
+}

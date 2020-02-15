@@ -1,0 +1,59 @@
+{
+  "extends": ["eslint:recommended", "google", "prettier", "react-app", "prettier/react"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks", "import"],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-useless-constructor": "off",
+    "no-console": "off",
+    "no-confusing-arrow": ["error", { "allowParens": false }],
+    "no-mixed-operators": [
+      "error",
+      {
+        "groups": [
+          ["&", "|", "^", "~", "<<", ">>", ">>>"],
+          ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+          ["&&", "||"],
+          ["in", "instanceof"]
+        ],
+        "allowSamePrecedence": true
+      }
+    ],
+    "arrow-parens": ["error", "always"],
+    "arrow-body-style": ["error", "always"],
+    "no-var": "error",
+    "prefer-const": "error",
+    "object-curly-newline": ["error", { "consistent": true }],
+    "curly": ["error", "all"],
+    "no-unused-vars": "error",
+    "prefer-template": "error",
+    "no-useless-concat": "error",
+    "import/newline-after-import": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
+    "import/no-duplicates": "error",
+    "import/no-cycle": "error",
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "import/no-useless-path-segments": "error",
+    "no-lonely-if": "error",
+    "no-unused-expressions": "error",
+    "no-shadow": "error",
+    "no-param-reassign": "error",
+    "no-dupe-args": "error",
+    "no-duplicate-case": "error",
+    "no-fallthrough": "error",
+    "no-await-in-loop": "error",
+    "no-use-before-define": "error",
+    "no-multiple-empty-lines": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "require-jsdoc": "off",
+    "valid-jsdoc": "off"
+  }
+}
