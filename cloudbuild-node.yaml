@@ -2,17 +2,17 @@ steps:
   # Install
   - name: 'gcr.io/cloud-builders/npm'
     args: ['ci']
-    dir: "backend"
+    dir: 'backend'
 
   # Test
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'lint']
-    dir: "backend"
+    dir: 'backend'
 
   # Build
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'build']
-    dir: "backend"
+    dir: 'backend'
 
   # Deploy
   - name: 'gcr.io/cloud-builders/gcloud'

@@ -1,16 +1,16 @@
 steps:
   # Install App
   - name: 'gcr.io/cloud-builders/npm'
-    args: ['ci']
-    dir: "frontend"
+    args: ['ci'] 
+    dir: 'frontend'
   # Test App
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'lint']
-    dir: "frontend"
+    dir: 'frontend'
   # Build App
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'build']
-    dir: "frontend"
+    dir: 'frontend'
 
   # Install Functions
   - name: 'gcr.io/cloud-builders/npm'
@@ -19,7 +19,7 @@ steps:
   # Test Functions
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'lint']
-    dir: 'frontend/functions'
+    dir: 'frontend/functions' 
 
   # Deploy
   - name: 'gcr.io/$PROJECT_ID/firebase'
@@ -30,5 +30,5 @@ steps:
         '--token',
         '1//06a0ASgdGRWuTCgYIARAAGAYSNwF-L9IrLih-cz2cb_XcnEgZHIn8PTiGT0v8cJMpWB2ugZ9EvTb9mtPjkbLOa3xAjRZknqiLlug',
       ]
-  dir: "frontend"
+  dir: 'frontend'
 timeout: '900s'
