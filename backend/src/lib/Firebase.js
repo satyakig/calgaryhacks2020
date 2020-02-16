@@ -1,10 +1,9 @@
 import admin from 'firebase-admin';
 
-let firestore;
-let auth;
+let firebase;
 
 export function initializeApp() {
-  const firebase = admin.initializeApp({
+  firebase = admin.initializeApp({
     credential: admin.credential.cert({
       type: 'service_account',
       project_id: 'calgaryhacks2020',
@@ -20,10 +19,8 @@ export function initializeApp() {
         'https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-abd7s%40calgaryhacks2020.iam.gserviceaccount.com',
     }),
   });
-
-  firestore = firebase.firestore();
-  auth = firebase.auth();
 }
 
-export const DATABASE = firestore;
-export const AUTH = auth;
+export function getDB() {
+  return firebase.firestore();
+}

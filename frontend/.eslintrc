@@ -43,7 +43,7 @@
     "import/no-useless-path-segments": "error",
     "no-lonely-if": "error",
     "no-unused-expressions": "error",
-    "no-shadow": "error",
+    "no-shadow": "warn",
     "no-param-reassign": "error",
     "no-dupe-args": "error",
     "no-duplicate-case": "error",
@@ -54,6 +54,7 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
     "require-jsdoc": "off",
-    "valid-jsdoc": "off"
+    "valid-jsdoc": "off",
+    "no-invalid-this": "off"
   }
 }
