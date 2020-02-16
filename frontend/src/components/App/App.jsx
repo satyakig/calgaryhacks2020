@@ -63,12 +63,14 @@ const App = () => {
     getDb()
       .collection('courses')
       .onSnapshot((snapshot) => {
-        const courses = [];
-        snapshot.forEach((doc) => {
-          courses.push(doc.data());
-        });
+        if (!snapshot.empty) {
+          const courses = [];
+          snapshot.forEach((doc) => {
+            courses.push(doc.data());
+          });
 
-        dispatch(updateCourses(courses));
+          dispatch(updateCourses(courses));
+        }
       });
   }, [dispatch]);
 

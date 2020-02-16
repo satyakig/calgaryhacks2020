@@ -1,6 +1,7 @@
 import Dashboard from 'views/Dashboard.jsx';
 import UserProfile from 'views/UserProfile.jsx';
 import CourseList from 'views/CourseList.jsx';
+import Chat from 'views/Chat.jsx';
 import Typography from 'views/Typography.jsx';
 import Icons from 'views/Icons.jsx';
 import Maps from 'views/Maps.jsx';
@@ -24,6 +25,12 @@ const dashboardRoutes = [
     name: 'Courses',
     icon: 'pe-7s-note2',
     component: CourseList,
+  },
+  {
+    path: '/chat',
+    name: 'Chat',
+    icon: 'pe-7s-chat',
+    component: Chat,
   },
   {
     path: '/typography',

@@ -31,10 +31,10 @@ class Header extends Component {
 
   render() {
     return (
-      <Navbar fluid>
+      <Navbar fluid={true}>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">{this.props.brandText}</a>
+            <span>{this.props.brandText}</span>
           </Navbar.Brand>
           <Navbar.Toggle onClick={this.mobileSidebarToggle} />
         </Navbar.Header>
