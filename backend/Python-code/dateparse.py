@@ -33,8 +33,6 @@ def weightOfWeek(weekNumber):
 # 1 is yellow
 # 2 is orange
 # 3 is red
-[{p:9,
-c:'red'},{}]
 def getStatusOfWeek(weekNumber):
     weekPercentage = weightCalendar[weekNumber]
     

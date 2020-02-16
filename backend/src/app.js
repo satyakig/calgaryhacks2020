@@ -21,12 +21,14 @@ app.use(
   }),
 );
 
-var buildEmptyList = function buildEmptyList(courses) {
-  let length = 17;
+var buildEmptyList = function buildEmptyList(listSize, size) {
+  if (!size) {
+    size = 0;
+  }
   let retVal = [];
 
-  for (let i = 0; i < length; i++) {
-    retVal.push(0);
+  for (let i = 0; i < listSize; i++) {
+    retVal.push(size);
   }
 
   return retVal;
@@ -38,7 +40,7 @@ app.get(
     let courseArr = req.params.courses.split(',');
     let courseRef = getDB().collection('courses');
 
-    let percentageArr = buildEmptyList();
+    let percentageArr = buildEmptyList(17);
 
     for (let i = 0; i < courseArr.length; i++) {
       let queryRef = await courseRef
@@ -94,8 +96,6 @@ app.get(
         });
     }
 
-    console.log('TEST');
-
     for (let i = 0; i < percentageArr.length; i++) {
       if (percentageArr[i] > 50) {
         percentageArr[i] = 3;
@@ -109,6 +109,44 @@ app.get(
     }
 
     res.send({ percentageArr });
+  }),
+);
+
+app.get(
+  '/getstudyplan/:courses',
+  asyncHandler(async (req, res) => {
+    let courseArr = req.params.courses.split(',');
+    let courseRef = getDB().collection('courses');
+
+    let todo_list = buildEmptyList(119, []);
+    let time_left = buildEmptyList(119, 6);
+
+    let all_assignments = [];
+
+    for (let i = 0; i < courseArr.length; i++) {
+      let queryRef = await courseRef
+        .where('course', '==', courseArr[i])
+        .get()
+        .then((snapshot) => {
+          if (snapshot.empty) {
+            console.log('No matching documents.');
+            return;
+          }
+
+          snapshot.forEach((doc) => {
+            let docJSON = doc.data();
+            let deliverables = docJSON.Deliverables;
+
+            for (let j = 0; j < deliverables.length; j++) {
+              let toAdd = {};
+              toAdd[docJSON.course] = deliverables[j];
+              all_assignments.push(toAdd);
+            }
+          });
+        });
+    }
+
+    res.send({ all_assignments });
   }),
 );
 
