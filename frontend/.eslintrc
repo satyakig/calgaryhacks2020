@@ -55,6 +55,7 @@
     "react-hooks/exhaustive-deps": "error",
     "require-jsdoc": "off",
     "valid-jsdoc": "off",
-    "no-invalid-this": "off"
+    "no-invalid-this": "off",
+    "camelcase": "off"
   }
 }
