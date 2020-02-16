@@ -4,4 +4,5 @@ export class UserModel {
   email = '';
   loggedIn = false;
   phoneNumber = '';
+  selectedCourses = [];
 }
