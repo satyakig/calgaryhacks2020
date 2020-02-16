@@ -65,6 +65,53 @@ app.get(
   }),
 );
 
+app.get(
+  '/getweekcolour/:courses',
+  asyncHandler(async (req, res) => {
+    let courseArr = req.params.courses.split(',');
+    let courseRef = getDB().collection('courses');
+
+    let percentageArr = buildEmptyList();
+
+    for (let i = 0; i < courseArr.length; i++) {
+      let queryRef = await courseRef
+        .where('course', '==', courseArr[i])
+        .get()
+        .then((snapshot) => {
+          if (snapshot.empty) {
+            console.log('No matching documents.');
+            return;
+          }
+
+          snapshot.forEach((doc) => {
+            let docJSON = doc.data();
+            let deliverables = docJSON.Deliverables;
+
+            for (let j = 0; j < deliverables.length; j++) {
+              percentageArr[deliverables[j].date_week - 1] += deliverables[j].weight;
+            }
+          });
+        });
+    }
+
+    console.log('TEST');
+
+    for (let i = 0; i < percentageArr.length; i++) {
+      if (percentageArr[i] > 50) {
+        percentageArr[i] = 3;
+      } else if (percentageArr[i] >= 20) {
+        percentageArr[i] = 2;
+      } else if (percentageArr[i] > 0) {
+        percentageArr[i] = 1;
+      } else {
+        percentageArr[i] = 0;
+      }
+    }
+
+    res.send({ percentageArr });
+  }),
+);
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.debug(`Server started at http://localhost:${PORT}`);
