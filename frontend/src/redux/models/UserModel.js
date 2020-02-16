@@ -3,5 +3,5 @@ export class UserModel {
   name = '';
   email = '';
   loggedIn = false;
-  phoneNuber = '';
+  phoneNumber = '';
 }

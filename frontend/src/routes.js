@@ -1,11 +1,11 @@
 import Dashboard from 'views/Dashboard.jsx';
 import UserProfile from 'views/UserProfile.jsx';
 import TableList from 'views/TableList.jsx';
+import CoursePicker from 'views/CoursePicker.jsx';
 import Typography from 'views/Typography.jsx';
 import Icons from 'views/Icons.jsx';
 import Maps from 'views/Maps.jsx';
 import Notifications from 'views/Notifications.jsx';
-import Login from 'components/Login/Login';
 
 const dashboardRoutes = [
   {
@@ -20,6 +20,13 @@ const dashboardRoutes = [
     name: 'User Profile',
     icon: 'pe-7s-user',
     component: UserProfile,
+    layout: '/admin',
+  },
+  {
+    path: '/course-picker',
+    name: 'Course Picker',
+    icon: 'pe-7s-user',
+    component: CoursePicker,
     layout: '/admin',
   },
   {
@@ -55,14 +62,6 @@ const dashboardRoutes = [
     name: 'Notifications',
     icon: 'pe-7s-bell',
     component: Notifications,
-    layout: '/admin',
-  },
-  {
-    upgrade: true,
-    path: '/login',
-    name: 'Login',
-    icon: 'pe-7s-rocket',
-    component: Login,
     layout: '/admin',
   },
 ];

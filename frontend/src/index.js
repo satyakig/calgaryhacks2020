@@ -17,6 +17,7 @@ import './assets/css/pe-icon-7-stroke.css';
 import App from './components/App/App';
 import combinedReducer from './redux/combinedReducer';
 import * as serviceWorker from './serviceWorker';
+import { initializeApp } from './lib/Firebase';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -37,6 +38,8 @@ const loggerMiddleware = createLogger({
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 const render = (Component) => {
+  initializeApp();
+
   // eslint-disable-next-line react/no-render-return-value
   return ReactDOM.render(
     <Provider store={store}>
