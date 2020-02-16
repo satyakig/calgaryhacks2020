@@ -39,9 +39,9 @@ const dashboardRoutes = [
     component: Typography,
   },
   {
-    path: '/icons',
-    name: 'Icons',
-    icon: 'pe-7s-science',
+    path: '/calendar',
+    name: 'Calendar',
+    icon: 'pe-7s-date',
     component: Icons,
   },
   {
