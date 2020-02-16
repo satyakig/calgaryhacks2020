@@ -495,7 +495,7 @@ const responsiveSales = [
   ],
 ];
 const legendSales = {
-  names: ['Open', 'Click', 'Click Second Time'],
+  names: ['Workload', 'Click', 'Click Second Time'],
   types: ['info', 'danger', 'warning'],
 };
 
@@ -533,22 +533,20 @@ const legendBar = {
 };
 
 function getCourseLoad() {
-  const labels = [];
+  let labels = [];
   for (let i = 0; i < 17; i++) {
     labels.push(i + 1);
   }
 
-  const series = [];
+  let series = [];
 
-  fetch('https://calgaryhacks2020.appspot.com/getweekpercent/GOPH375,CPSC457,CPSC441')
-    .then((res) => {
-      return res.json();
-    })
+  fetch(`https://calgaryhacks2020.appspot.com/getweekpercent/GOPH375,CPSC457,CPSC441`)
+    .then((res) => res.json())
     .then((result) => {
       series.push(result['percentageArr']);
     });
 
-  const retVal = {};
+  let retVal = {};
   retVal['labels'] = labels;
   retVal['series'] = series;
 
@@ -592,4 +590,7 @@ module.exports = {
   optionsBar,
   responsiveBar,
   legendBar, // For charts (Dashboard view)
+  courseLoad,
+  customCharOpt,
+  legendCourse,
 };

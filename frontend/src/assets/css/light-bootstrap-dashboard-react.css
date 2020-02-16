@@ -2563,8 +2563,7 @@ fieldset[disabled] .form-control {
 }
 
 .card-stats .numbers {
-  font-size: 2em;
-  text-align: right;
+  font-size: 1em;
 }
 .card-stats .numbers p {
   margin: 0;

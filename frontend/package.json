@@ -58,7 +58,7 @@
     "firebase": "7.8.2",
     "firebaseui": "4.4.0",
     "fullcalendar": "3.10.1",
-    "moment": "^2.24.0",
+    "moment": "2.24.0",
     "node-sass": "4.13.1",
     "prop-types": "15.7.2",
     "react": "16.12.0",
@@ -74,6 +74,7 @@
     "react-router-dom": "5.1.2",
     "react-scripts": "3.4.0",
     "react-toggle": "4.1.1",
+    "react-twitter-embed": "3.0.3",
     "redux": "4.0.5",
     "redux-logger": "3.0.6",
     "redux-thunk": "2.3.0"
