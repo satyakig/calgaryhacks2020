@@ -7,7 +7,7 @@ class AdminNavbarLinks extends Component {
       <div>
         <Nav pullRight>
           <NavItem eventKey={3} href="#">
-              Logout
+            Logout
           </NavItem>
         </Nav>
       </div>

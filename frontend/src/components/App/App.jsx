@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/app';
-import { Modal} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminLayout from '../../layouts/Admin';
 import { getAuth, getDb } from '../../lib/Firebase';
@@ -75,8 +75,8 @@ const App = () => {
   return (
     <div>
       <Modal show={!loggedIn} size="lg">
-      <Modal.Header>
-        <Modal.Title>Login</Modal.Title>
+        <Modal.Header>
+          <Modal.Title>Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={getAuth()} />

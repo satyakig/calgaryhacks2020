@@ -46,11 +46,7 @@ class Sidebar extends Component {
               <img src={logo} alt="logo_image" />
             </div>
           </a>
-          <a
-            className="simple-text logo-normal"
-          >
-            StudyBudy
-          </a>
+          <a className="simple-text logo-normal">StudyBudy</a>
         </div>
         <div className="sidebar-wrapper">
           <ul className="nav">
