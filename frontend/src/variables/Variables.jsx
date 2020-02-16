@@ -445,11 +445,45 @@ const iconsArray = [
 // //
 // // // // For dashboard's charts
 // //
+
+// class MyComponent extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       error: null,
+//       isLoaded: false,
+//       items: [],
+//     };
+//   }
+
+//   componentDidMount() {
+//     fetch('https://calgaryhacks2020.appspot.com/getweekcolour/GOPH375,CPSC457')
+//       .then((res) => res.json())
+//       .then(
+//         (result) => {
+//           this.setState({
+//             isLoaded: true,
+//             items: result.items,
+//           });
+//         },
+//         // Note: it's important to handle errors here
+//         // instead of a catch() block so that we don't swallow
+//         // exceptions from actual bugs in components.
+//         (error) => {
+//           this.setState({
+//             isLoaded: true,
+//             error,
+//           });
+//         },
+//       );
+//   }
+// }
+
 //
 // Data for Pie Chart
 const dataPie = {
-  labels: ['40%', '20%', '40%'],
-  series: [40, 20, 40],
+  labels: ['40%', '20%', '40%', '40%', '20%', '40%'],
+  series: [0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 20, 0, 0, 40, 0],
 };
 const legendPie = {
   names: ['Open', 'Bounce', 'Unsubscribe'],
