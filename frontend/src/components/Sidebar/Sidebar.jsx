@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import AdminNavbarLinks from '../Navbars/AdminNavbarLinks.jsx';
 
-import logo from 'assets/img/reactlogo.png';
+import logo from 'assets/img/logo.png';
 
 class Sidebar extends Component {
   constructor(props) {
@@ -46,7 +46,6 @@ class Sidebar extends Component {
               <img src={logo} alt="logo_image" />
             </div>
           </a>
-          <a className="simple-text logo-normal">StudyBudy</a>
         </div>
         <div className="sidebar-wrapper">
           <ul className="nav">
