@@ -28,7 +28,11 @@ var buildEmptyList = function buildEmptyList(listSize, size) {
   let retVal = [];
 
   for (let i = 0; i < listSize; i++) {
-    retVal.push(size);
+    if (Array.isArray(size)) {
+      retVal.push([]);
+    } else {
+      retVal.push(size);
+    }
   }
 
   return retVal;
@@ -118,9 +122,6 @@ app.get(
     let courseArr = req.params.courses.split(',');
     let courseRef = getDB().collection('courses');
 
-    let todo_list = buildEmptyList(119, []);
-    let time_left = buildEmptyList(119, 6);
-
     let all_assignments = [];
 
     for (let i = 0; i < courseArr.length; i++) {
@@ -139,14 +140,38 @@ app.get(
 
             for (let j = 0; j < deliverables.length; j++) {
               let toAdd = {};
-              toAdd[docJSON.course] = deliverables[j];
+              toAdd['deliverables'] = deliverables[j];
+              toAdd['deliverables']['task'] = docJSON.course + ': ' + toAdd['deliverables']['name'];
               all_assignments.push(toAdd);
             }
           });
         });
     }
 
-    res.send({ all_assignments });
+    let todo_list = buildEmptyList(119, []);
+    let time_left = buildEmptyList(119, 6);
+
+    // Generating todo_list
+    for (let i = 0; i < all_assignments.length; i++) {
+      let name = all_assignments[i]['deliverables']['task'];
+      let day = all_assignments[i]['deliverables']['date_day'] - 1;
+      let hours = all_assignments[i]['deliverables']['hours'];
+
+      // Search for a free day;
+      while (hours > 0) {
+        while (time_left[day] < 2) {
+          day -= 1;
+        }
+
+        time_left[day] -= 2;
+        todo_list[day].push(name + ': 2 Hours');
+
+        hours -= 2;
+        day -= 1;
+      }
+    }
+
+    res.send({ todo_list });
   }),
 );
 
