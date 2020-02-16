@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AdminNavbar from '../components/Navbars/AdminNavbar';
 import Sidebar from '../components/Sidebar/Sidebar';
-
 import routes from '../routes.js';
-import image from '../assets/img/sidebar-3.jpg';
 
 class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: image,
       color: 'black',
       hasImage: true,
     };
@@ -38,18 +35,6 @@ class Admin extends Component {
     }
 
     return 'Brand';
-  };
-
-  handleImageClick = (img) => {
-    this.setState({ image: img });
-  };
-
-  handleColorClick = (color) => {
-    this.setState({ color: color });
-  };
-
-  handleHasImage = (hasImage) => {
-    this.setState({ hasImage: hasImage });
   };
 
   componentDidUpdate(e) {
