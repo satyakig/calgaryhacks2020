@@ -18,41 +18,51 @@ const ChatRoom = () => {
   }
 
   useEffect(() => {
-    getDb()
-      .collection(`chat${user.selectedCourses[room + 1]}`)
-      .onSnapshot((snapshot) => {
-        if (!snapshot.empty) {
-          let messages = [];
-          snapshot.forEach((doc) => {
-            messages.push(doc.data());
-          });
+    const roomName = user.selectedCourses[room - 1];
 
-          messages = messages
-            .map((message) => {
-              return {
-                ...message,
-                timestamp: moment(message.timestamp).toDate(),
-              };
-            })
-            .sort((message1, message2) => {
-              return message1.timestamp - message2.timestamp;
+    if (room === 0 || roomName === undefined) {
+      setChats([]);
+    } else {
+      getDb()
+        .collection(`chat${roomName}`)
+        .onSnapshot((snapshot) => {
+          if (!snapshot.empty) {
+            let messages = [];
+            snapshot.forEach((doc) => {
+              messages.push(doc.data());
             });
 
-          setChats(messages);
-        } else {
-          setChats([]);
-        }
-      });
+            messages = messages
+              .map((message) => {
+                return {
+                  ...message,
+                  timestamp: moment(message.timestamp).toDate(),
+                };
+              })
+              .sort((message1, message2) => {
+                return message1.timestamp - message2.timestamp;
+              });
+
+            setChats(messages);
+          } else {
+            setChats([]);
+          }
+        });
+    }
   }, [room, user.selectedCourses]);
 
   function addMessage(event) {
-    const message = event.message;
-    message.timestamp = moment(message.timestamp).valueOf();
+    const roomName = user.selectedCourses[room - 1];
 
-    getDb()
-      .collection(`chat${user.selectedCourses[room]}`)
-      .add(message)
-      .then();
+    if (room !== 0 && roomName !== undefined) {
+      const message = event.message;
+      message.timestamp = moment(message.timestamp).valueOf();
+
+      getDb()
+        .collection(`chat${roomName}`)
+        .add(message)
+        .then();
+    }
   }
 
   const userId = {
@@ -63,7 +73,7 @@ const ChatRoom = () => {
 
   return (
     <div style={{ padding: '10px' }}>
-      <Tabs activeKey={room} defaultActiveKey={0} onSelect={handleSelect}>
+      <Tabs activeKey={room} defaultActiveKey={0} onSelect={handleSelect} id="Tabs">
         <Tab eventKey={0} title="Bot">
           <iframe
             title="Bot"
@@ -71,10 +81,11 @@ const ChatRoom = () => {
             src="https://console.dialogflow.com/api-client/demo/embedded/5d4b04ff-b9aa-4487-8dcc-015c6293b00d"
             style={{
               position: 'relative',
-              height: '500px',
+              height: '600px',
               display: 'flex',
               flexDirection: 'column',
               width: '500px',
+              maxWidth: '90vw',
               margin: 'auto',
             }}
           />

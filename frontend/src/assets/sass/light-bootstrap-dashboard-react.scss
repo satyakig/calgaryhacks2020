@@ -37,3 +37,15 @@
 @import 'lbd/cards';
 @import 'lbd/chartist';
 @import 'lbd/responsive';
+
+.fc-event {
+  border-width: 1.5px !important;
+  border-radius: 5px !important;
+  background-color: #efefef !important;
+  font-weight: bold;
+}
+
+.pull-right {
+  display: flex;
+  justify-content: center;
+}
