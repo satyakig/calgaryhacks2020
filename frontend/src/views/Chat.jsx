@@ -64,9 +64,25 @@ const ChatRoom = () => {
   return (
     <div style={{ padding: '10px' }}>
       <Tabs activeKey={room} defaultActiveKey={0} onSelect={handleSelect}>
+        <Tab eventKey={0} title="Bot">
+          <iframe
+            title="Bot"
+            allow="microphone;"
+            src="https://console.dialogflow.com/api-client/demo/embedded/5d4b04ff-b9aa-4487-8dcc-015c6293b00d"
+            style={{
+              position: 'relative',
+              height: '600px',
+              display: 'flex',
+              flexDirection: 'column',
+              width: '500px',
+              margin: 'auto',
+            }}
+          />
+        </Tab>
+
         {user.selectedCourses.map((course, index) => {
           return (
-            <Tab eventKey={index} title={course} key={index}>
+            <Tab eventKey={index + 1} title={course} key={index}>
               <Chat user={userId} messages={chats} onMessageSend={addMessage} />
             </Tab>
           );
