@@ -570,12 +570,9 @@ const customCharOpt = {
   showPoint: false,
   fullWidth: true,
   chartPadding: {
-    right: 50,
+    right: 10,
   },
 };
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 const courseLoad = getCourseLoad();
 

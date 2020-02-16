@@ -206,7 +206,7 @@
 .card-stats {
   .icon-big {
     font-size: 3em;
-    min-height: 64px;
+    min-height: 150px;
     i {
       font-weight: bold;
       line-height: 59px;
@@ -219,4 +219,8 @@
       margin: 0;
     }
   }
+}
+
+.red-card {
+  background-color: #ffcccb;
 }

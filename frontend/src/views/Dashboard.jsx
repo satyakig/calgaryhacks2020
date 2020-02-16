@@ -5,21 +5,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import { Card } from 'components/Card/Card.jsx';
 import { StatsCard } from 'components/StatsCard/StatsCard.jsx';
 import { Tasks } from 'components/Tasks/Tasks.jsx';
-import {
-  dataPie,
-  legendPie,
-  dataSales,
-  optionsSales,
-  responsiveSales,
-  legendSales,
-  dataBar,
-  optionsBar,
-  responsiveBar,
-  legendBar,
-  courseLoad,
-  customCharOpt,
-  legendCourse,
-} from 'variables/Variables.jsx';
+import { responsiveSales, courseLoad, customCharOpt, legendCourse } from 'variables/Variables.jsx';
 
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
@@ -35,7 +21,7 @@ class Dashboard extends Component {
     return legend;
   }
   getCurrentLevel() {
-    let retVal = 7;
+    let retVal = 1;
     fetch(`https://calgaryhacks2020.appspot.com/getweekcolour/GOPH375,CPSC457,CPSC441`)
       .then((res) => res.json())
       .then((result) => {
@@ -44,16 +30,25 @@ class Dashboard extends Component {
 
     return retVal;
   }
+  appendStr(str1, str2) {
+    return str1 + '\n' + str2;
+  }
   getJoke() {
+    let retStr = '';
+
     fetch(`https://official-joke-api.appspot.com/random_joke`)
       .then((res) => res.json())
       .then((result) => {
-        return result['setup'] + '\n' + result['punchline'];
+        retStr = result['setup'] + '\n' + result['punchline'];
       });
 
     return (
       'Why do you never see elephants hiding in trees?' + '\n' + "Because they're so good at it."
     );
+  }
+
+  message() {
+    return 'You have a lot of work this week. Work hard!';
   }
   render() {
     return (
@@ -62,9 +57,9 @@ class Dashboard extends Component {
           <Row>
             <Col lg={4} sm={6}>
               <StatsCard
-                bigIcon={<i className="pe-7s-hourglass" />}
-                statsText={this.getCurrentLevel()}
-                statsValue="105GB"
+                className="red-card"
+                bigIcon={<i className="pe-7s-info" />}
+                statsValue={this.message()}
                 statsIcon={<i className="fa fa-refresh" />}
                 statsIconText="Updated now"
               />
@@ -73,7 +68,7 @@ class Dashboard extends Component {
               <TwitterTimelineEmbed
                 sourceType="profile"
                 screenName="UCalgary"
-                options={{ height: 150 }}
+                options={{ height: 215 }}
               />
             </Col>
             <Col lg={4} sm={6}>
