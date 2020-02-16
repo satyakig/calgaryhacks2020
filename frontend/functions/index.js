@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const fetch = require('node-fetch');
 const { dialogflow } = require('actions-on-google');
 
 admin.initializeApp();
@@ -46,6 +47,7 @@ app.intent(ASK_457, (conv) => {
     'It is an introduction to operating systems principles. Performance measurement; concurrent programs; the management of information, memory and processor resources.';
   conv.ask(todo_list);
 });
+
 app.intent(BUSIEST_WEEK, (conv) => {
   let todo_list =
     'Your busiest week is from March 21 - March 28. You have 4 deliverables due for a total of 75 weight.';
@@ -67,13 +69,52 @@ exports.addUser = functions.auth.user().onCreate((user) => {
   const name = user.displayName ? user.displayName : `User ${random}`;
   const phone = user.phoneNumber ? user.phoneNumber : random;
 
+  return fetch('https://randomuser.me/api/')
+    .then((res) => {
+      return res.json();
+    })
+    .then((result) => {
+      const image = result.results[0].picture.large;
+
+      return firestore
+        .collection('users')
+        .doc(id)
+        .set({
+          uid: id,
+          email,
+          name,
+          phone,
+          avatarUrl: image,
+        });
+    });
+});
+
+exports.addPics = functions.https.onRequest((req, res) => {
   return firestore
     .collection('users')
-    .doc(id)
-    .set({
-      uid: id,
-      email,
-      name,
-      phone,
+    .get()
+    .then((snapshot) => {
+      return snapshot.forEach((doc) => {
+        fetch('https://randomuser.me/api/')
+          .then((res) => {
+            return res.json();
+          })
+          .then((result) => {
+            const image = result.results[0].picture.large;
+
+            return firestore
+              .collection('users')
+              .doc(doc.id)
+              .update({
+                avatarUrl: image,
+              });
+          });
+      });
+    })
+    .then(() => {
+      res.send('Okay');
+    })
+    .catch(() => {
+      res.send('Fucked');
     });
 });

@@ -58,7 +58,7 @@ const ChatRoom = () => {
   const userId = {
     id: user.uid,
     name: user.name,
-    avatarUrl: 'https://via.placeholder.com/24/008000/008000.png',
+    avatarUrl: user.avatarUrl,
   };
 
   return (

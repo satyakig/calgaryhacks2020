@@ -5,4 +5,6 @@ export class UserModel {
   loggedIn = false;
   phoneNumber = '';
   selectedCourses = [];
+  about = '';
+  avatarUrl = '';
 }

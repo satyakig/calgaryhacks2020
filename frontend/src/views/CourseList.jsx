@@ -33,13 +33,16 @@ const CourseList = () => {
       } else {
         // Add
         const newArr = [...user.selectedCourses, course];
-        getDb()
-          .collection('users')
-          .doc(user.uid)
-          .update({
-            selectedCourses: newArr,
-          })
-          .then();
+
+        if (newArr.length <= 5) {
+          getDb()
+            .collection('users')
+            .doc(user.uid)
+            .update({
+              selectedCourses: newArr,
+            })
+            .then();
+        }
       }
     };
   }

@@ -1,18 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Row, Col, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Card } from '../components/Card/Card.jsx';
 import { FormInputs } from '../components/FormInputs/FormInputs.jsx';
 import { UserCard } from '../components/UserCard/UserCard.jsx';
 import Button from '../components/CustomButton/CustomButton.jsx';
-import avatar from '../assets/img/faces/face-3.jpg';
+import { getDb } from '../lib/Firebase';
 
 const UserProfile = () => {
   const user = useSelector((state) => {
     return state.userReducer;
   });
 
-  function onClick() {}
+  const [about, setAbout] = useState('');
+
+  function onClick() {
+    if (about && user.loggedIn) {
+      getDb()
+        .collection('users')
+        .doc(user.uid)
+        .update({
+          about,
+        });
+    }
+  }
+
+  useEffect(() => {
+    window.setInterval(() => {
+      const el = document.getElementById('formControlsTextarea');
+      if (el) {
+        setAbout(el.value);
+      }
+    }, 200);
+  }, []);
 
   return (
     <div className="content">
@@ -32,7 +52,6 @@ const UserProfile = () => {
                         placeholder: 'Email',
                         defaultValue: user.email !== null ? user.email : '',
                         disabled: user.email !== null,
-                        controlid: 'email',
                       },
                     ]}
                   />
@@ -46,14 +65,13 @@ const UserProfile = () => {
                         placeholder: 'Name',
                         defaultValue: user.name !== null ? user.name : '',
                         disabled: user.name !== null,
-                        controlid: 'name',
                       },
                     ]}
                   />
 
                   <Row>
                     <Col md={12}>
-                      <FormGroup controlid="formControlsTextarea">
+                      <FormGroup>
                         <ControlLabel>About Me</ControlLabel>
                         <FormControl
                           rows="5"
@@ -61,7 +79,7 @@ const UserProfile = () => {
                           bsClass="form-control"
                           placeholder="Here can be your description"
                           defaultValue=""
-                          controlid="about"
+                          id="formControlsTextarea"
                         />
                       </FormGroup>
                     </Col>
@@ -77,17 +95,11 @@ const UserProfile = () => {
           <Col md={4}>
             <UserCard
               bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
-              avatar={avatar}
+              avatar={user.avatarUrl}
               name={user.name}
               userName={user.email.toLowerCase().split('@')[0]}
               description={
-                <span>
-                  "Lamborghini Mercy
-                  <br />
-                  Your chick she so thirsty
-                  <br />
-                  I'm in that two seat Lambo"
-                </span>
+                <span style={{ fontStyle: 'italic' }}>{user.about ? `"${user.about}"` : ''}</span>
               }
             />
           </Col>
