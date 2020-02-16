@@ -19,7 +19,7 @@ const ChatRoom = () => {
 
   useEffect(() => {
     getDb()
-      .collection(`chat${user.selectedCourses[room]}`)
+      .collection(`chat${user.selectedCourses[room + 1]}`)
       .onSnapshot((snapshot) => {
         if (!snapshot.empty) {
           let messages = [];
@@ -71,7 +71,7 @@ const ChatRoom = () => {
             src="https://console.dialogflow.com/api-client/demo/embedded/5d4b04ff-b9aa-4487-8dcc-015c6293b00d"
             style={{
               position: 'relative',
-              height: '600px',
+              height: '500px',
               display: 'flex',
               flexDirection: 'column',
               width: '500px',
