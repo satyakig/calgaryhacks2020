@@ -445,11 +445,12 @@ const iconsArray = [
 // //
 // // // // For dashboard's charts
 // //
+
 //
 // Data for Pie Chart
 const dataPie = {
-  labels: ['40%', '20%', '40%'],
-  series: [40, 20, 40],
+  labels: ['40%', '20%', '40%', '40%', '20%', '40%'],
+  series: [0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 20, 0, 0, 40, 0],
 };
 const legendPie = {
   names: ['Open', 'Bounce', 'Unsubscribe'],

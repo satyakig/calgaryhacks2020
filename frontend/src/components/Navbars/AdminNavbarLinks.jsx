@@ -1,18 +1,21 @@
-import React, { Component } from 'react';
-import { NavItem, Nav } from 'react-bootstrap';
+import React from 'react';
+import { Nav, Button } from 'react-bootstrap';
+import { getAuth } from '../../lib/Firebase';
 
-class AdminNavbarLinks extends Component {
-  render() {
-    return (
-      <div>
-        <Nav pullRight>
-          <NavItem eventKey={3} href="#">
-            Logout
-          </NavItem>
-        </Nav>
-      </div>
-    );
+const AdminNavbarLinks = () => {
+  function logout() {
+    getAuth()
+      .signOut()
+      .then();
   }
-}
+
+  return (
+    <div>
+      <Nav pullRight>
+        <Button onClick={logout}>Logout</Button>
+      </Nav>
+    </div>
+  );
+};
 
 export default AdminNavbarLinks;

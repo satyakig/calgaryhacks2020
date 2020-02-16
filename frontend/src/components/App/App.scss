@@ -5,3 +5,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.fc-title {
+  position: relative;
+  width: inherit;
+  white-space: pre-wrap;
+  user-select: none;
+}

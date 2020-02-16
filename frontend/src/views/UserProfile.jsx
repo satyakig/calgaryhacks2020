@@ -1,11 +1,11 @@
 import React from 'react';
 import { Grid, Row, Col, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-import { Card } from 'components/Card/Card.jsx';
-import { FormInputs } from 'components/FormInputs/FormInputs.jsx';
-import { UserCard } from 'components/UserCard/UserCard.jsx';
-import Button from 'components/CustomButton/CustomButton.jsx';
-import avatar from 'assets/img/faces/face-3.jpg';
 import { useSelector } from 'react-redux';
+import { Card } from '../components/Card/Card.jsx';
+import { FormInputs } from '../components/FormInputs/FormInputs.jsx';
+import { UserCard } from '../components/UserCard/UserCard.jsx';
+import Button from '../components/CustomButton/CustomButton.jsx';
+import avatar from '../assets/img/faces/face-3.jpg';
 
 const UserProfile = () => {
   const user = useSelector((state) => {
@@ -32,7 +32,7 @@ const UserProfile = () => {
                         placeholder: 'Email',
                         defaultValue: user.email !== null ? user.email : '',
                         disabled: user.email !== null,
-                        controlId: 'email',
+                        controlid: 'email',
                       },
                     ]}
                   />
@@ -46,14 +46,14 @@ const UserProfile = () => {
                         placeholder: 'Name',
                         defaultValue: user.name !== null ? user.name : '',
                         disabled: user.name !== null,
-                        controlId: 'name',
+                        controlid: 'name',
                       },
                     ]}
                   />
 
                   <Row>
                     <Col md={12}>
-                      <FormGroup controlId="formControlsTextarea">
+                      <FormGroup controlid="formControlsTextarea">
                         <ControlLabel>About Me</ControlLabel>
                         <FormControl
                           rows="5"
@@ -61,7 +61,7 @@ const UserProfile = () => {
                           bsClass="form-control"
                           placeholder="Here can be your description"
                           defaultValue=""
-                          controlId="about"
+                          controlid="about"
                         />
                       </FormGroup>
                     </Col>
@@ -78,8 +78,8 @@ const UserProfile = () => {
             <UserCard
               bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
               avatar={avatar}
-              name="Mike Andrew"
-              userName="michael24"
+              name={user.name}
+              userName={user.email.toLowerCase().split('@')[0]}
               description={
                 <span>
                   "Lamborghini Mercy
@@ -88,19 +88,6 @@ const UserProfile = () => {
                   <br />
                   I'm in that two seat Lambo"
                 </span>
-              }
-              socials={
-                <div>
-                  <Button simple>
-                    <i className="fa fa-facebook-square" />
-                  </Button>
-                  <Button simple>
-                    <i className="fa fa-twitter" />
-                  </Button>
-                  <Button simple>
-                    <i className="fa fa-google-plus-square" />
-                  </Button>
-                </div>
               }
             />
           </Col>
