@@ -34,7 +34,7 @@ const dashboardRoutes = [
   {
     path: '/calendar',
     name: 'Calendar',
-    icon: 'pe-7s-science',
+    icon: 'pe-7s-date',
     component: Icons,
   },
   {
