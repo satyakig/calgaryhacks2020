@@ -77,7 +77,7 @@ app.get(
     let courseArr = req.params.courses.split(',');
     let courseRef = getDB().collection('courses');
 
-    let percentageArr = buildEmptyList();
+    let percentageArr = buildEmptyList(17);
 
     for (let i = 0; i < courseArr.length; i++) {
       let queryRef = await courseRef
