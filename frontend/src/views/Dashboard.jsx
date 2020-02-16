@@ -1,41 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import ChartistGraph from 'react-chartist';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Card } from '../components/Card/Card.jsx';
 import { Tasks } from '../components/Tasks/Tasks.jsx';
-import { responsiveSales, customCharOpt } from '../variables/Variables.jsx';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import { useSelector } from 'react-redux';
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 
 const Dashboard = () => {
   const selectedCourses = useSelector((state) => {
     return state.userReducer.selectedCourses;
   });
 
-  const [courseLoad, setCourseLoad] = useState({
-    labels: [],
-    series: [],
-  });
+  const [courseLoad, setCourseLoad] = useState([]);
+  const [yRange, setYRange] = useState([0, 0]);
   const [joke, setJoke] = useState(
     "Why do you never see elephants hiding in trees?\nBecause they're so good at it.",
   );
 
   function getCourseLoad(courses) {
     if (courses.length > 0) {
-      const labels = [];
-      for (let i = 0; i < 17; i++) {
-        labels.push(i + 1);
-      }
-
       fetch(`https://calgaryhacks2020.appspot.com/getweekpercent/${courses.join(',')}`)
         .then((res) => {
           return res.json();
         })
         .then((result) => {
-          setCourseLoad({
-            labels,
-            series: [result['percentageArr']],
+          const arr = result['percentageArr'];
+
+          const vals = arr.map((val, index) => {
+            return {
+              name: `Week ${index + 1}`,
+              Load: val,
+            };
           });
+
+          setCourseLoad(vals);
+          setYRange([Math.min(...arr) - 1, Math.max(...arr) + 5]);
         });
     }
   }
@@ -66,21 +73,31 @@ const Dashboard = () => {
     <div className="content">
       <Grid fluid>
         <Row>
-          <Col md={8}>
+          <Col lg={8} sm={8}>
             <Card
-              statsIcon="fa fa-history"
-              id="chartHours"
+              statsIcon="pe-7s-smile"
               title="Homework Load"
               category="Here is a view of your course load over the semester"
               stats={joke}
               content={
-                <div className="ct-chart">
-                  <ChartistGraph
-                    data={courseLoad}
-                    type="Line"
-                    options={customCharOpt}
-                    responsiveOptions={responsiveSales}
-                  />
+                <div style={{ width: '100%', height: 400 }}>
+                  <ResponsiveContainer>
+                    <AreaChart
+                      data={courseLoad}
+                      margin={{
+                        top: 0,
+                        right: 5,
+                        left: 0,
+                        bottom: 10,
+                      }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis domain={yRange} />
+                      <Tooltip />
+                      <Area type="monotone" dataKey="Load" stroke="#1DC7EA" fill="#31DBFE" />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
               }
             />
@@ -90,7 +107,7 @@ const Dashboard = () => {
               <TwitterTimelineEmbed
                 sourceType="profile"
                 screenName="UCalgary"
-                options={{ height: 250 }}
+                options={{ height: 350 }}
               />
             </Row>
             <Row>

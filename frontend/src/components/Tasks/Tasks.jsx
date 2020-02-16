@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-<<<<<<< HEAD
 import Checkbox from '../CustomCheckbox/CustomCheckbox.jsx';
-=======
-import Checkbox from 'components/CustomCheckbox/CustomCheckbox.jsx';
->>>>>>> master
 import { useSelector } from 'react-redux';
 
 export const Tasks = () => {

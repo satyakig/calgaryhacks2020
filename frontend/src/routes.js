@@ -2,10 +2,7 @@ import Dashboard from 'views/Dashboard.jsx';
 import UserProfile from 'views/UserProfile.jsx';
 import CourseList from 'views/CourseList.jsx';
 import Chat from 'views/Chat.jsx';
-import Typography from 'views/Typography.jsx';
 import Calendar from 'views/Calendar.jsx';
-import Maps from 'views/Maps.jsx';
-import Notifications from 'views/Notifications.jsx';
 
 const dashboardRoutes = [
   {
