@@ -5,7 +5,6 @@ import Typography from 'views/Typography.jsx';
 import Icons from 'views/Icons.jsx';
 import Maps from 'views/Maps.jsx';
 import Notifications from 'views/Notifications.jsx';
-import Login from 'components/Login/Login';
 
 const dashboardRoutes = [
   {
@@ -55,14 +54,6 @@ const dashboardRoutes = [
     name: 'Notifications',
     icon: 'pe-7s-bell',
     component: Notifications,
-    layout: '/admin',
-  },
-  {
-    upgrade: true,
-    path: '/login',
-    name: 'Login',
-    icon: 'pe-7s-rocket',
-    component: Login,
     layout: '/admin',
   },
 ];
