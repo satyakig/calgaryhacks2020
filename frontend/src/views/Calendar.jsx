@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction'; // needed for dayClick
-// import { getDb } from '../lib/Firebase';
-
-// import './styles.css';
-// must manually import the stylesheets for each plugin
+import interactionPlugin from '@fullcalendar/interaction';
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
-import './main.scss'; // webpack must be configured to do this
 
 export default () => {
-  const [courseLoad, setCourseLoad] = useState([]);
   const [events, setEvents] = useState([]);
+  const [userLoad, setUserLoad] = useState([]);
+  const [courseLoad, setCourseLoad] = useState([]);
+
   const courses = useSelector((state) => {
     return state.courseReducer;
   });
@@ -25,11 +23,37 @@ export default () => {
   });
 
   function getWeeklyCourseLoad(userCourses) {
-    fetch(`https://calgaryhacks2020.appspot.com/getweek/${userCourses.join(',')}`)
-      .then((res) => res.json())
-      .then((result) => {
-        setCourseLoad(result['percentageArr']);
-      });
+    if (userCourses.length > 0) {
+      fetch(`https://calgaryhacks2020.appspot.com/getstudyplan/${userCourses.join(',')}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((result) => {
+          const load = result['todo_list'];
+
+          let day = moment('January 01, 2020', 'MMMM DD, YYYY');
+          const newCourses = [];
+
+          for (let i = 0; i < load.length; i++) {
+            const cs = load[i];
+
+            if (cs.length > 0) {
+              for (let j = 0; j < cs.length; j++) {
+                const c = cs[j];
+                newCourses.push({
+                  title: c.split(': ').join(' - '),
+                  date: day.format('YYYY-MM-DD'),
+                  color: '#546E7A',
+                });
+              }
+            }
+
+            day = day.add(1, 'days');
+          }
+
+          setCourseLoad(newCourses);
+        });
+    }
   }
 
   useEffect(() => {
@@ -44,12 +68,17 @@ export default () => {
       .map((event) => {
         return {
           ...event,
-          title: `${event.course} ${event.name}`,
+          title: `${event.course} - ${event.name}`,
+          color: '#f44336',
         };
       });
 
-    setEvents(userEvents);
+    setUserLoad(userEvents);
   }, [user, courses]);
+
+  useEffect(() => {
+    setEvents([...userLoad, ...courseLoad]);
+  }, [userLoad, courseLoad]);
 
   return (
     <FullCalendar
@@ -60,13 +89,10 @@ export default () => {
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
       }}
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+      handleWindowResize={true}
       contentHeight={700}
-      // eventColor="red"
-      // ref={this.calendarComponentRef}
-      // weekends={this.state.calendarWeekends}
-      // events={this.state.calendarEvents}
-      // dateClick={this.handleDateClick}
       events={events}
+      themeSyste="bootstrap"
     />
   );
 };

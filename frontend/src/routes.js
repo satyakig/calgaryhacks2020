@@ -3,7 +3,7 @@ import UserProfile from 'views/UserProfile.jsx';
 import CourseList from 'views/CourseList.jsx';
 import Chat from 'views/Chat.jsx';
 import Typography from 'views/Typography.jsx';
-import Icons from 'views/Icons.jsx';
+import Calendar from 'views/Calendar.jsx';
 import Maps from 'views/Maps.jsx';
 import Notifications from 'views/Notifications.jsx';
 
@@ -42,7 +42,7 @@ const dashboardRoutes = [
     path: '/calendar',
     name: 'Calendar',
     icon: 'pe-7s-date',
-    component: Icons,
+    component: Calendar,
   },
   {
     path: '/maps',
