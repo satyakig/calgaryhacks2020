@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -13,29 +14,30 @@ import '@fullcalendar/timegrid/main.css';
 import './main.scss'; // webpack must be configured to do this
 
 export default () => {
+  const courses = useSelector((state) => {
+    return state.courseReducer;
+  });
+
+  const user = useSelector((state) => {
+    return state.userReducer;
+  });
+
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    getDb()
-      .collection('courses')
-      .onSnapshot(function(querySnapshot) {
-        const newEvents = [];
-        querySnapshot.forEach(function(doc) {
-          newEvents.push(doc.data());
-        });
-
-        const newEvents2 = newEvents.flatMap((course) => {
-          return course.Deliverables.map((ev) => {
-            return {
-              ...ev,
-              title: `${course.course} ${ev.name}`,
-            };
-          });
-        });
-
-        setEvents(newEvents2);
+    const userEvents = courses.deliverables
+      .filter((deliverable) => {
+        return user.selectedCourses.includes(deliverable.course);
+      })
+      .map((event) => {
+        return {
+          ...event,
+          title: `${event.course} ${event.name}`,
+        };
       });
-  }, []);
+
+    setEvents(userEvents);
+  }, [user, courses]);
 
   return (
     <FullCalendar
