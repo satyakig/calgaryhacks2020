@@ -111,7 +111,7 @@ const Dashboard = () => {
             <Row>
               <Card
                 title="Tasks"
-                category="Targed Studying for Today"
+                category="Targeted Studying for Today"
                 stats="Updated 3 minutes ago"
                 statsIcon="fa fa-history"
                 content={
