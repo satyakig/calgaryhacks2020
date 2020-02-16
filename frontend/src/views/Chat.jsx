@@ -39,6 +39,8 @@ const ChatRoom = () => {
             });
 
           setChats(messages);
+        } else {
+          setChats([]);
         }
       });
   }, [room, user.selectedCourses]);
