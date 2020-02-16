@@ -5,6 +5,11 @@ class AdminNavbarLinks extends Component {
   render() {
     return (
       <div>
+        <Nav pullRight>
+          <NavItem eventKey={3} href="#">
+              Logout
+          </NavItem>
+        </Nav>
       </div>
     );
   }
