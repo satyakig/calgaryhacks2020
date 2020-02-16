@@ -16,8 +16,8 @@ class Admin extends Component {
     };
   }
 
-  getRoutes = (routes) => {
-    return routes.map((prop, key) => {
+  getRoutes = (r) => {
+    return r.map((prop, key) => {
       return (
         <Route
           path={prop.path}
@@ -40,8 +40,8 @@ class Admin extends Component {
     return 'Brand';
   };
 
-  handleImageClick = (image) => {
-    this.setState({ image: image });
+  handleImageClick = (img) => {
+    this.setState({ image: img });
   };
 
   handleColorClick = (color) => {

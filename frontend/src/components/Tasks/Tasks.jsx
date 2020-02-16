@@ -1,55 +1,48 @@
-import React, { Component } from 'react';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
-import Checkbox from 'components/CustomCheckbox/CustomCheckbox.jsx';
-import Button from 'components/CustomButton/CustomButton.jsx';
+import React, { useState, useEffect } from 'react';
+import Checkbox from '../CustomCheckbox/CustomCheckbox.jsx';
+import { useSelector } from 'react-redux';
 
-export class Tasks extends Component {
-  handleCheckbox = (event) => {
-    const target = event.target;
-    console.log(event.target);
-    this.setState({
-      [target.name]: target.checked,
-    });
-  };
-  render() {
-    const edit = <Tooltip id="edit_tooltip">Edit Task</Tooltip>;
-    const remove = <Tooltip id="remove_tooltip">Remove</Tooltip>;
-    const tasksTitle = [
-      'Sign contract for "What are conference organizers afraid of?"',
-      'Lines From Great Russian Literature? Or E-mails From My Boss?',
-      'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroi',
-      'Create 4 Invisible User Experiences you Never Knew About',
-      'Read "Following makes Medium better"',
-      'Unfollow 5 enemies from twitter',
-    ];
-    const tasks = [];
-    let number;
-    for (let i = 0; i < tasksTitle.length; i++) {
-      number = `checkbox${i}`;
-      tasks.push(
-        <tr key={i}>
-          <td>
-            <Checkbox number={number} isChecked={i === 1 || i === 2} />
-          </td>
-          <td>{tasksTitle[i]}</td>
-          <td className="td-actions text-right">
-            <OverlayTrigger placement="top" overlay={edit}>
-              <Button bsStyle="info" simple type="button" bsSize="xs">
-                <i className="fa fa-edit" />
-              </Button>
-            </OverlayTrigger>
+export const Tasks = () => {
+  const courses = useSelector((state) => {
+    return state.userReducer.selectedCourses;
+  });
+  const [day, setDay] = useState([]);
 
-            <OverlayTrigger placement="top" overlay={remove}>
-              <Button bsStyle="danger" simple type="button" bsSize="xs">
-                <i className="fa fa-times" />
-              </Button>
-            </OverlayTrigger>
-          </td>
-        </tr>,
-      );
+  function getStudyPlan(cs) {
+    if (cs.length > 0) {
+      fetch(`https://calgaryhacks2020.appspot.com/getstudyplan/${cs.join(',')}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((result) => {
+          const now = new Date();
+          const start = new Date(now.getFullYear(), 0, 0);
+          const diff = now - start;
+          const oneDay = 1000 * 60 * 60 * 24;
+
+          setDay(result['todo_list'][Math.floor(diff / oneDay)]);
+        });
     }
-    return <tbody>{tasks}</tbody>;
   }
-}
 
-export default Tasks;
+  useEffect(() => {
+    getStudyPlan(courses);
+  }, [courses]);
+
+  const tasksTitle = day;
+
+  const tasks = [];
+  let number;
+  for (let i = 0; i < tasksTitle.length; i++) {
+    number = `checkbox${i}`;
+    tasks.push(
+      <tr key={i}>
+        <td>
+          <Checkbox number={number} isChecked={i === -1} />
+        </td>
+        <td>{tasksTitle[i]}</td>
+      </tr>,
+    );
+  }
+  return <tbody>{tasks}</tbody>;
+};

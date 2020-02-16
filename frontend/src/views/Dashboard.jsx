@@ -1,139 +1,102 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import ChartistGraph from 'react-chartist';
 import { Grid, Row, Col } from 'react-bootstrap';
+import { Card } from '../components/Card/Card.jsx';
+import { Tasks } from '../components/Tasks/Tasks.jsx';
+import { responsiveSales, customCharOpt } from '../variables/Variables.jsx';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
+import { useSelector } from 'react-redux';
 
-import { Card } from 'components/Card/Card.jsx';
-import { StatsCard } from 'components/StatsCard/StatsCard.jsx';
-import { Tasks } from 'components/Tasks/Tasks.jsx';
-import {
-  dataPie,
-  legendPie,
-  dataSales,
-  optionsSales,
-  responsiveSales,
-  legendSales,
-  dataBar,
-  optionsBar,
-  responsiveBar,
-  legendBar,
-} from 'variables/Variables.jsx';
+const Dashboard = () => {
+  const selectedCourses = useSelector((state) => {
+    return state.userReducer.selectedCourses;
+  });
 
-class Dashboard extends Component {
-  createLegend(json) {
-    const legend = [];
-    for (let i = 0; i < json['names'].length; i++) {
-      const type = `fa fa-circle text-${json['types'][i]}`;
-      legend.push(<i className={type} key={i} />);
-      legend.push(' ');
-      legend.push(json['names'][i]);
+  const [courseLoad, setCourseLoad] = useState({
+    labels: [],
+    series: [],
+  });
+  const [joke, setJoke] = useState(
+    "Why do you never see elephants hiding in trees?\nBecause they're so good at it.",
+  );
+
+  function getCourseLoad(courses) {
+    if (courses.length > 0) {
+      const labels = [];
+      for (let i = 0; i < 17; i++) {
+        labels.push(i + 1);
+      }
+
+      fetch(`https://calgaryhacks2020.appspot.com/getweekpercent/${courses.join(',')}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((result) => {
+          setCourseLoad({
+            labels,
+            series: [result['percentageArr']],
+          });
+        });
     }
-    return legend;
   }
-  render() {
-    return (
-      <div className="content">
-        <Grid fluid>
-          <Row>
-            <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="pe-7s-server text-warning" />}
-                statsText="Capacity"
-                statsValue="105GB"
-                statsIcon={<i className="fa fa-refresh" />}
-                statsIconText="Updated now"
-              />
-            </Col>
-            <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="pe-7s-wallet text-success" />}
-                statsText="Revenue"
-                statsValue="$1,345"
-                statsIcon={<i className="fa fa-calendar-o" />}
-                statsIconText="Last day"
-              />
-            </Col>
-            <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="pe-7s-graph1 text-danger" />}
-                statsText="Errors"
-                statsValue="23"
-                statsIcon={<i className="fa fa-clock-o" />}
-                statsIconText="In the last hour"
-              />
-            </Col>
-            <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="fa fa-twitter text-info" />}
-                statsText="Followers"
-                statsValue="+45"
-                statsIcon={<i className="fa fa-refresh" />}
-                statsIconText="Updated now"
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col md={8}>
-              <Card
-                statsIcon="fa fa-history"
-                id="chartHours"
-                title="Users Behavior"
-                category="24 Hours performance"
-                stats="Updated 3 minutes ago"
-                content={
-                  <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataSales}
-                      type="Line"
-                      options={optionsSales}
-                      responsiveOptions={responsiveSales}
-                    />
-                  </div>
-                }
-                legend={<div className="legend">{this.createLegend(legendSales)}</div>}
-              />
-            </Col>
-            <Col md={4}>
-              <Card
-                statsIcon="fa fa-clock-o"
-                title="Email Statistics"
-                category="Last Campaign Performance"
-                stats="Campaign sent 2 days ago"
-                content={
-                  <div id="chartPreferences" className="ct-chart ct-perfect-fourth">
-                    <ChartistGraph data={dataPie} type="Pie" />
-                  </div>
-                }
-                legend={<div className="legend">{this.createLegend(legendPie)}</div>}
-              />
-            </Col>
-          </Row>
 
-          <Row>
-            <Col md={6}>
-              <Card
-                id="chartActivity"
-                title="2014 Sales"
-                category="All products including Taxes"
-                stats="Data information certified"
-                statsIcon="fa fa-check"
-                content={
-                  <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataBar}
-                      type="Bar"
-                      options={optionsBar}
-                      responsiveOptions={responsiveBar}
-                    />
-                  </div>
-                }
-                legend={<div className="legend">{this.createLegend(legendBar)}</div>}
-              />
-            </Col>
+  function getJoke() {
+    fetch('https://official-joke-api.appspot.com/random_joke')
+      .then((res) => {
+        return res.json();
+      })
+      .then((result) => {
+        setJoke(`${result['setup']}\n${result['punchline']}`);
+      });
+  }
 
-            <Col md={6}>
+  useEffect(() => {
+    window.setInterval(() => {
+      getJoke();
+    }, 5000);
+  }, []);
+
+  useEffect(() => {
+    getCourseLoad(selectedCourses);
+  }, [selectedCourses]);
+
+  console.log(courseLoad);
+
+  return (
+    <div className="content">
+      <Grid fluid>
+        <Row>
+          <Col md={8}>
+            <Card
+              statsIcon="fa fa-history"
+              id="chartHours"
+              title="Homework Load"
+              category="Here is a view of your course load over the semester"
+              stats={joke}
+              content={
+                <div className="ct-chart">
+                  <ChartistGraph
+                    data={courseLoad}
+                    type="Line"
+                    options={customCharOpt}
+                    responsiveOptions={responsiveSales}
+                  />
+                </div>
+              }
+            />
+          </Col>
+          <Col lg={4} sm={4}>
+            <Row>
+              <TwitterTimelineEmbed
+                sourceType="profile"
+                screenName="UCalgary"
+                options={{ height: 250 }}
+              />
+            </Row>
+            <Row>
               <Card
                 title="Tasks"
-                category="Backend development"
+                category="Targed Studying for Today"
                 stats="Updated 3 minutes ago"
                 statsIcon="fa fa-history"
                 content={
@@ -144,12 +107,12 @@ class Dashboard extends Component {
                   </div>
                 }
               />
-            </Col>
-          </Row>
-        </Grid>
-      </div>
-    );
-  }
-}
+            </Row>
+          </Col>
+        </Row>
+      </Grid>
+    </div>
+  );
+};
 
 export default Dashboard;
