@@ -1,7 +1,6 @@
 import Dashboard from 'views/Dashboard.jsx';
 import UserProfile from 'views/UserProfile.jsx';
-import TableList from 'views/TableList.jsx';
-import CoursePicker from 'views/CoursePicker.jsx';
+import CourseList from 'views/CourseList.jsx';
 import Typography from 'views/Typography.jsx';
 import Icons from 'views/Icons.jsx';
 import Maps from 'views/Maps.jsx';
@@ -21,16 +20,10 @@ const dashboardRoutes = [
     component: UserProfile,
   },
   {
-    path: '/course-picker',
-    name: 'Course Picker',
-    icon: 'pe-7s-user',
-    component: CoursePicker,
-  },
-  {
-    path: '/table',
-    name: 'Table List',
+    path: '/courses',
+    name: 'Courses',
     icon: 'pe-7s-note2',
-    component: TableList,
+    component: CourseList,
   },
   {
     path: '/typography',

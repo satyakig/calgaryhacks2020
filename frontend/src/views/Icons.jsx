@@ -19,12 +19,12 @@ export default () => {
     getDb()
       .collection('courses')
       .onSnapshot(function(querySnapshot) {
-        const events = [];
+        const newEvents = [];
         querySnapshot.forEach(function(doc) {
-          events.push(doc.data());
+          newEvents.push(doc.data());
         });
 
-        const newEvents = events.flatMap((course) => {
+        const newEvents2 = newEvents.flatMap((course) => {
           return course.Deliverables.map((ev) => {
             return {
               ...ev,
@@ -33,7 +33,7 @@ export default () => {
           });
         });
 
-        setEvents(newEvents);
+        setEvents(newEvents2);
       });
   }, []);
 

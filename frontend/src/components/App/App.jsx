@@ -5,8 +5,9 @@ import firebase from 'firebase/app';
 import { Modal} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminLayout from '../../layouts/Admin';
-import { getAuth } from '../../lib/Firebase';
+import { getAuth, getDb } from '../../lib/Firebase';
 import { updateUser } from '../../redux/actions/UserActions';
+import { updateCourses } from '../../redux/actions/CourseAction';
 import { UserModel } from '../../redux/models/UserModel';
 import './App.scss';
 
@@ -37,19 +38,38 @@ const App = () => {
   useEffect(() => {
     getAuth().onAuthStateChanged((user) => {
       if (user) {
-        dispatch(
-          updateUser({
-            uid: user.uid,
-            name: user.displayName,
-            email: user.email,
-            loggedIn: true,
-            phoneNumber: user.phoneNumber,
-          }),
-        );
+        getDb()
+          .collection('users')
+          .doc(user.uid)
+          .onSnapshot((snapshot) => {
+            dispatch(
+              updateUser({
+                ...snapshot.data(),
+                uid: user.uid,
+                name: user.displayName,
+                email: user.email,
+                loggedIn: true,
+                phoneNumber: user.phoneNumber,
+              }),
+            );
+          });
       } else {
         dispatch(updateUser(new UserModel()));
       }
     });
+  }, [dispatch]);
+
+  useEffect(() => {
+    getDb()
+      .collection('courses')
+      .onSnapshot((snapshot) => {
+        const courses = [];
+        snapshot.forEach((doc) => {
+          courses.push(doc.data());
+        });
+
+        dispatch(updateCourses(courses));
+      });
   }, [dispatch]);
 
   return (

@@ -11,6 +11,7 @@ export class DeliverableModel {
 export class CourseModel {
   course = '';
   Deliverables = [];
+  description = '';
 }
 
 export class CoursesModel {
