@@ -527,55 +527,6 @@ const responsiveBar = [
     },
   ],
 ];
-const legendBar = {
-  names: ['Tesla Model S', 'BMW 5 Series'],
-  types: ['info', 'danger'],
-};
-
-function getCourseLoad() {
-  let labels = [];
-  for (let i = 0; i < 17; i++) {
-    labels.push(i + 1);
-  }
-
-  let series = [];
-
-  fetch(`https://calgaryhacks2020.appspot.com/getweekpercent/GOPH375,CPSC457,CPSC441`)
-    .then((res) => res.json())
-    .then((result) => {
-      series.push(result['percentageArr']);
-    });
-
-  let retVal = {};
-  retVal['labels'] = labels;
-  retVal['series'] = series;
-
-  return retVal;
-}
-
-const legendCourse = {
-  names: ['Workload'],
-  types: ['info'],
-};
-
-const customCharOpt = {
-  low: 0,
-  high: 125,
-  showArea: true,
-  height: '245px',
-  axisX: {
-    showGrid: false,
-  },
-  lineSmooth: true,
-  showLine: true,
-  showPoint: false,
-  fullWidth: true,
-  chartPadding: {
-    right: 10,
-  },
-};
-
-const courseLoad = getCourseLoad();
 
 module.exports = {
   style, // For notifications (App container and Notifications view
@@ -589,8 +540,4 @@ module.exports = {
   dataBar,
   optionsBar,
   responsiveBar,
-  legendBar, // For charts (Dashboard view)
-  courseLoad,
-  customCharOpt,
-  legendCourse,
 };
