@@ -4,11 +4,6 @@ steps:
     args: ["ci"]
     dir: "backend"
 
-  # Test
-  - name: "gcr.io/cloud-builders/npm"
-    args: ["run", "lint"]
-    dir: "backend"
-
   # Build
   - name: "gcr.io/cloud-builders/npm"
     args: ["run", "build"]
