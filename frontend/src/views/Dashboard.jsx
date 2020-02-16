@@ -67,8 +67,6 @@ const Dashboard = () => {
     getCourseLoad(selectedCourses);
   }, [selectedCourses]);
 
-  console.log(courseLoad);
-
   return (
     <div className="content">
       <Grid fluid>

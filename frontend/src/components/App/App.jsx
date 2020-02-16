@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/app';
 import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { routes } from '../../routes';
 import AdminLayout from '../../layouts/Admin';
 import { getAuth, getDb } from '../../lib/Firebase';
 import { updateUser } from '../../redux/actions/UserActions';
@@ -11,9 +12,7 @@ import { updateCourses } from '../../redux/actions/CourseAction';
 import { UserModel } from '../../redux/models/UserModel';
 import './App.scss';
 
-const App = () => {
-  useEffect(() => {}, []);
-
+const App = (props) => {
   const dispatch = useDispatch();
 
   const loggedIn = useSelector((state) => {
@@ -34,6 +33,12 @@ const App = () => {
       },
     },
   };
+
+  useEffect(() => {
+    if (!routes.includes(props.location.pathname)) {
+      props.history.push('/dashboard');
+    }
+  }, [props]);
 
   useEffect(() => {
     getAuth().onAuthStateChanged((user) => {
@@ -98,4 +103,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withRouter(App);

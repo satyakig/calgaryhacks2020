@@ -4,6 +4,8 @@ import CourseList from 'views/CourseList.jsx';
 import Chat from 'views/Chat.jsx';
 import Calendar from 'views/Calendar.jsx';
 
+export const routes = ['/dashboard', '/user', '/courses', '/chat', '/calendar'];
+
 const dashboardRoutes = [
   {
     path: '/dashboard',
