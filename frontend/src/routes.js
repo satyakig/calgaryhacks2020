@@ -1,6 +1,7 @@
 import Dashboard from 'views/Dashboard.jsx';
 import UserProfile from 'views/UserProfile.jsx';
 import TableList from 'views/TableList.jsx';
+import CoursePicker from 'views/CoursePicker.jsx';
 import Typography from 'views/Typography.jsx';
 import Icons from 'views/Icons.jsx';
 import Maps from 'views/Maps.jsx';
@@ -20,6 +21,13 @@ const dashboardRoutes = [
     name: 'User Profile',
     icon: 'pe-7s-user',
     component: UserProfile,
+    layout: '/admin',
+  },
+  {
+    path: '/course-picker',
+    name: 'Course Picker',
+    icon: 'pe-7s-user',
+    component: CoursePicker,
     layout: '/admin',
   },
   {
