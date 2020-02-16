@@ -33,28 +33,10 @@ const dashboardRoutes = [
     component: Chat,
   },
   {
-    path: '/typography',
-    name: 'Typography',
-    icon: 'pe-7s-news-paper',
-    component: Typography,
-  },
-  {
     path: '/calendar',
     name: 'Calendar',
     icon: 'pe-7s-date',
     component: Calendar,
-  },
-  {
-    path: '/maps',
-    name: 'Maps',
-    icon: 'pe-7s-map-marker',
-    component: Maps,
-  },
-  {
-    path: '/notifications',
-    name: 'Notifications',
-    icon: 'pe-7s-bell',
-    component: Notifications,
   },
 ];
 
