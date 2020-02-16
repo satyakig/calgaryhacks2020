@@ -1,52 +1,56 @@
-import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction'; // needed for dayClick
+import { getDb } from '../lib/Firebase';
 
-import Card from 'components/Card/Card';
-import { iconsArray } from 'variables/Variables.jsx';
+// import './styles.css';
+// must manually import the stylesheets for each plugin
+import '@fullcalendar/core/main.css';
+import '@fullcalendar/daygrid/main.css';
+import '@fullcalendar/timegrid/main.css';
+import './main.scss'; // webpack must be configured to do this
 
-class Icons extends Component {
-  render() {
-    return (
-      <div className="content">
-        <Grid fluid>
-          <Row>
-            <Col md={12}>
-              <Card
-                title="202 Awesome Stroke Icons"
-                ctAllIcons
-                category={
-                  <span>
-                    Handcrafted by our friends from{' '}
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="http://themes-pixeden.com/font-demos/7-stroke/index.html"
-                    >
-                      Pixeden
-                    </a>
-                  </span>
-                }
-                content={
-                  <Row>
-                    {iconsArray.map((prop, key) => {
-                      return (
-                        <Col lg={2} md={3} sm={4} xs={6} className="font-icon-list" key={key}>
-                          <div className="font-icon-detail">
-                            <i className={prop} />
-                            <input type="text" defaultValue={prop} />
-                          </div>
-                        </Col>
-                      );
-                    })}
-                  </Row>
-                }
-              />
-            </Col>
-          </Row>
-        </Grid>
-      </div>
-    );
-  }
-}
+export default () => {
+  const [events, setEvents] = useState([]);
 
-export default Icons;
+  useEffect(() => {
+    getDb()
+      .collection('courses')
+      .onSnapshot(function(querySnapshot) {
+        const events = [];
+        querySnapshot.forEach(function(doc) {
+          events.push(doc.data());
+        });
+
+        const newEvents = events.flatMap((course) => {
+          return course.Deliverables.map((ev) => {
+            return {
+              ...ev,
+              title: `${course.course} ${ev.name}`,
+            };
+          });
+        });
+
+        setEvents(newEvents);
+      });
+  }, []);
+
+  return (
+    <FullCalendar
+      defaultView="dayGridMonth"
+      header={{
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+      }}
+      plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+      // ref={this.calendarComponentRef}
+      // weekends={this.state.calendarWeekends}
+      // events={this.state.calendarEvents}
+      // dateClick={this.handleDateClick}
+      events={events}
+    />
+  );
+};
