@@ -43,7 +43,7 @@ export default () => {
                 newCourses.push({
                   title: c.split(': ').join(' - '),
                   date: day.format('YYYY-MM-DD'),
-                  color: '#546E7A',
+                  color: '#a2bdaf',
                 });
               }
             }
