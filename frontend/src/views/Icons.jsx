@@ -4,7 +4,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // needed for dayClick
-import { getDb } from '../lib/Firebase';
+// import { getDb } from '../lib/Firebase';
 
 // import './styles.css';
 // must manually import the stylesheets for each plugin
@@ -14,6 +14,8 @@ import '@fullcalendar/timegrid/main.css';
 import './main.scss'; // webpack must be configured to do this
 
 export default () => {
+  const [courseLoad, setCourseLoad] = useState([]);
+  const [events, setEvents] = useState([]);
   const courses = useSelector((state) => {
     return state.courseReducer;
   });
@@ -22,7 +24,17 @@ export default () => {
     return state.userReducer;
   });
 
-  const [events, setEvents] = useState([]);
+  function getWeeklyCourseLoad(userCourses) {
+    fetch(`https://calgaryhacks2020.appspot.com/getweek/${userCourses.join(',')}`)
+      .then((res) => res.json())
+      .then((result) => {
+        setCourseLoad(result['percentageArr']);
+      });
+  }
+
+  useEffect(() => {
+    getWeeklyCourseLoad(user.selectedCourses);
+  }, [user.selectedCourses]);
 
   useEffect(() => {
     const userEvents = courses.deliverables
@@ -49,6 +61,7 @@ export default () => {
       }}
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
       contentHeight={700}
+      // eventColor="red"
       // ref={this.calendarComponentRef}
       // weekends={this.state.calendarWeekends}
       // events={this.state.calendarEvents}
