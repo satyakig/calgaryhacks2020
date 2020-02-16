@@ -46,6 +46,7 @@ export default () => {
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
       }}
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+      contentHeight={800}
       // ref={this.calendarComponentRef}
       // weekends={this.state.calendarWeekends}
       // events={this.state.calendarEvents}
