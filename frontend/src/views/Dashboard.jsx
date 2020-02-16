@@ -16,7 +16,12 @@ import {
   optionsBar,
   responsiveBar,
   legendBar,
+  courseLoad,
+  customCharOpt,
+  legendCourse,
 } from 'variables/Variables.jsx';
+
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 class Dashboard extends Component {
   createLegend(json) {
@@ -29,45 +34,54 @@ class Dashboard extends Component {
     }
     return legend;
   }
+  getCurrentLevel() {
+    let retVal = 7;
+    fetch(`https://calgaryhacks2020.appspot.com/getweekcolour/GOPH375,CPSC457,CPSC441`)
+      .then((res) => res.json())
+      .then((result) => {
+        retVal = result['percentageArr'][5];
+      });
+
+    return retVal;
+  }
+  getJoke() {
+    fetch(`https://official-joke-api.appspot.com/random_joke`)
+      .then((res) => res.json())
+      .then((result) => {
+        return result['setup'] + '\n' + result['punchline'];
+      });
+
+    return (
+      'Why do you never see elephants hiding in trees?' + '\n' + "Because they're so good at it."
+    );
+  }
   render() {
     return (
       <div className="content">
         <Grid fluid>
           <Row>
-            <Col lg={3} sm={6}>
+            <Col lg={4} sm={6}>
               <StatsCard
-                bigIcon={<i className="pe-7s-server text-warning" />}
-                statsText="Capacity"
+                bigIcon={<i className="pe-7s-hourglass" />}
+                statsText={this.getCurrentLevel()}
                 statsValue="105GB"
                 statsIcon={<i className="fa fa-refresh" />}
                 statsIconText="Updated now"
               />
             </Col>
-            <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="pe-7s-wallet text-success" />}
-                statsText="Revenue"
-                statsValue="$1,345"
-                statsIcon={<i className="fa fa-calendar-o" />}
-                statsIconText="Last day"
+            <Col lg={4} sm={6}>
+              <TwitterTimelineEmbed
+                sourceType="profile"
+                screenName="UCalgary"
+                options={{ height: 150 }}
               />
             </Col>
-            <Col lg={3} sm={6}>
+            <Col lg={4} sm={6}>
               <StatsCard
-                bigIcon={<i className="pe-7s-graph1 text-danger" />}
-                statsText="Errors"
-                statsValue="23"
+                statsText="Joke of the day"
+                statsValue={this.getJoke()}
                 statsIcon={<i className="fa fa-clock-o" />}
                 statsIconText="In the last hour"
-              />
-            </Col>
-            <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="fa fa-twitter text-info" />}
-                statsText="Followers"
-                statsValue="+45"
-                statsIcon={<i className="fa fa-refresh" />}
-                statsIconText="Updated now"
               />
             </Col>
           </Row>
@@ -76,64 +90,26 @@ class Dashboard extends Component {
               <Card
                 statsIcon="fa fa-history"
                 id="chartHours"
-                title="Users Behavior"
-                category="24 Hours performance"
+                title="Homework Load"
+                category="Here is a view of your course load over the semester"
                 stats="Updated 3 minutes ago"
                 content={
                   <div className="ct-chart">
                     <ChartistGraph
-                      data={dataSales}
+                      data={courseLoad}
                       type="Line"
-                      options={optionsSales}
+                      options={customCharOpt}
                       responsiveOptions={responsiveSales}
                     />
                   </div>
                 }
-                legend={<div className="legend">{this.createLegend(legendSales)}</div>}
+                legend={<div className="legend">{this.createLegend(legendCourse)}</div>}
               />
             </Col>
             <Col md={4}>
               <Card
-                statsIcon="fa fa-clock-o"
-                title="Email Statistics"
-                category="Last Campaign Performance"
-                stats="Campaign sent 2 days ago"
-                content={
-                  <div id="chartPreferences" className="ct-chart ct-perfect-fourth">
-                    <ChartistGraph data={dataPie} type="Pie" />
-                  </div>
-                }
-                legend={<div className="legend">{this.createLegend(legendPie)}</div>}
-              />
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md={6}>
-              <Card
-                id="chartActivity"
-                title="2014 Sales"
-                category="All products including Taxes"
-                stats="Data information certified"
-                statsIcon="fa fa-check"
-                content={
-                  <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataBar}
-                      type="Bar"
-                      options={optionsBar}
-                      responsiveOptions={responsiveBar}
-                    />
-                  </div>
-                }
-                legend={<div className="legend">{this.createLegend(legendBar)}</div>}
-              />
-            </Col>
-
-            <Col md={6}>
-              <Card
                 title="Tasks"
-                category="Backend development"
+                category="Targed Studying for Today"
                 stats="Updated 3 minutes ago"
                 statsIcon="fa fa-history"
                 content={

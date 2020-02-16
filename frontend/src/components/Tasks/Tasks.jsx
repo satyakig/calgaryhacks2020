@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import Checkbox from 'components/CustomCheckbox/CustomCheckbox.jsx';
-import Button from 'components/CustomButton/CustomButton.jsx';
 import { useSelector } from 'react-redux';
 
 export const Tasks = () => {
@@ -22,8 +20,6 @@ export const Tasks = () => {
 
         setDay(result['todo_list'][day]);
       });
-
-    console.log(`https://calgaryhacks2020.appspot.com/getstudyplan/${courses.join(',')}`);
   }
 
   useEffect(() => {
@@ -38,10 +34,7 @@ export const Tasks = () => {
     });
   }
 
-  const edit = <Tooltip id="edit_tooltip">Edit Task</Tooltip>;
-  const remove = <Tooltip id="remove_tooltip">Remove</Tooltip>;
   const tasksTitle = day;
-  console.log(day);
 
   const tasks = [];
   let number;
@@ -50,22 +43,9 @@ export const Tasks = () => {
     tasks.push(
       <tr key={i}>
         <td>
-          <Checkbox number={number} isChecked={i === 1 || i === 2} />
+          <Checkbox number={number} isChecked={i === -1} />
         </td>
         <td>{tasksTitle[i]}</td>
-        <td className="td-actions text-right">
-          <OverlayTrigger placement="top" overlay={edit}>
-            <Button bsStyle="info" simple type="button" bsSize="xs">
-              <i className="fa fa-edit" />
-            </Button>
-          </OverlayTrigger>
-
-          <OverlayTrigger placement="top" overlay={remove}>
-            <Button bsStyle="danger" simple type="button" bsSize="xs">
-              <i className="fa fa-times" />
-            </Button>
-          </OverlayTrigger>
-        </td>
       </tr>,
     );
   }
