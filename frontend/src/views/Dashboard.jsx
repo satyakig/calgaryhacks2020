@@ -55,32 +55,6 @@ class Dashboard extends Component {
       <div className="content">
         <Grid fluid>
           <Row>
-            <Col lg={4} sm={6}>
-              <StatsCard
-                className="red-card"
-                bigIcon={<i className="pe-7s-info" />}
-                statsValue={this.message()}
-                statsIcon={<i className="fa fa-refresh" />}
-                statsIconText="Updated now"
-              />
-            </Col>
-            <Col lg={4} sm={6}>
-              <TwitterTimelineEmbed
-                sourceType="profile"
-                screenName="UCalgary"
-                options={{ height: 215 }}
-              />
-            </Col>
-            <Col lg={4} sm={6}>
-              <StatsCard
-                statsText="Joke of the day"
-                statsValue={this.getJoke()}
-                statsIcon={<i className="fa fa-clock-o" />}
-                statsIconText="In the last hour"
-              />
-            </Col>
-          </Row>
-          <Row>
             <Col md={8}>
               <Card
                 statsIcon="fa fa-history"
@@ -101,19 +75,36 @@ class Dashboard extends Component {
                 legend={<div className="legend">{this.createLegend(legendCourse)}</div>}
               />
             </Col>
-            <Col md={4}>
-              <Card
-                title="Tasks"
-                category="Targed Studying for Today"
-                stats="Updated 3 minutes ago"
-                statsIcon="fa fa-history"
-                content={
-                  <div className="table-full-width">
-                    <table className="table">
-                      <Tasks />
-                    </table>
-                  </div>
-                }
+            <Col lg={4} sm={4}>
+              <Row>
+                <TwitterTimelineEmbed
+                  sourceType="profile"
+                  screenName="UCalgary"
+                  options={{ height: 250 }}
+                />
+              </Row>
+              <Row>
+                <Card
+                  title="Tasks"
+                  category="Targed Studying for Today"
+                  stats="Updated 3 minutes ago"
+                  statsIcon="fa fa-history"
+                  content={
+                    <div className="table-full-width">
+                      <table className="table">
+                        <Tasks />
+                      </table>
+                    </div>
+                  }
+                />
+              </Row>
+            </Col>
+            <Col lg={8} sm={4}>
+              <StatsCard
+                statsText="Joke of the day"
+                statsValue={this.getJoke()}
+                statsIcon={<i className="fa fa-clock-o" />}
+                statsIconText="In the last hour"
               />
             </Col>
           </Row>
