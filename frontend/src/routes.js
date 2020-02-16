@@ -5,7 +5,7 @@ import Typography from 'views/Typography.jsx';
 import Icons from 'views/Icons.jsx';
 import Maps from 'views/Maps.jsx';
 import Notifications from 'views/Notifications.jsx';
-import Upgrade from 'views/Upgrade.jsx';
+import Login from 'components/Login/Login';
 
 const dashboardRoutes = [
   {
@@ -59,10 +59,10 @@ const dashboardRoutes = [
   },
   {
     upgrade: true,
-    path: '/upgrade',
-    name: 'Upgrade to PRO',
+    path: '/login',
+    name: 'Login',
     icon: 'pe-7s-rocket',
-    component: Upgrade,
+    component: Login,
     layout: '/admin',
   },
 ];

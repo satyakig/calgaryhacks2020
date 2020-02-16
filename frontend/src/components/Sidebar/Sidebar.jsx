@@ -12,16 +12,20 @@ class Sidebar extends Component {
       width: window.innerWidth,
     };
   }
+
   activeRoute(routeName) {
     return this.props.location.pathname.indexOf(routeName) > -1 ? 'active' : '';
   }
+
   updateDimensions() {
     this.setState({ width: window.innerWidth });
   }
+
   componentDidMount() {
     this.updateDimensions();
     window.addEventListener('resize', this.updateDimensions.bind(this));
   }
+
   render() {
     const sidebarBackground = {
       backgroundImage: `url(${this.props.image})`,
@@ -46,7 +50,7 @@ class Sidebar extends Component {
             href="https://www.creative-tim.com?ref=lbd-sidebar"
             className="simple-text logo-normal"
           >
-            Creative Tim
+            School Pal
           </a>
         </div>
         <div className="sidebar-wrapper">
@@ -55,17 +59,8 @@ class Sidebar extends Component {
             {this.props.routes.map((prop, key) => {
               if (!prop.redirect) {
                 return (
-                  <li
-                    className={
-                      prop.upgrade ? 'active active-pro' : this.activeRoute(prop.layout + prop.path)
-                    }
-                    key={key}
-                  >
-                    <NavLink
-                      to={prop.layout + prop.path}
-                      className="nav-link"
-                      activeClassName="active"
-                    >
+                  <li className={this.activeRoute(prop.path)} key={key}>
+                    <NavLink to={prop.path} className="nav-link" activeClassName="active">
                       <i className={prop.icon} />
                       <p>{prop.name}</p>
                     </NavLink>

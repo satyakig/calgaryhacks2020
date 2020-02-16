@@ -2,11 +2,10 @@ import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firebase-firestore';
 
-let db;
-let auth;
+let firebase;
 
 export function initializeApp() {
-  app.initializeApp({
+  firebase = app.initializeApp({
     apiKey: 'AIzaSyCTJmJ3NahGEZmycTOFoUldDolb2xznGAw',
     authDomain: 'calgaryhacks2020.firebaseapp.com',
     databaseURL: 'https://calgaryhacks2020.firebaseio.com',
@@ -16,11 +15,12 @@ export function initializeApp() {
     appId: '1:812265596927:web:6ccb0ef695b60b0e48a9ca',
     measurementId: 'G-1M9ELQWNSX',
   });
-
-  db = app.firestore();
-  auth = app.auth();
 }
 
-export const DATABASE = db;
+export function getDb() {
+  return firebase.firestore();
+}
 
-export const AUTH = auth;
+export function getAuth() {
+  return firebase.auth();
+}

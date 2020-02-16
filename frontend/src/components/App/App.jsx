@@ -1,24 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import AdminLayout from 'layouts/Admin';
-import { initializeApp } from 'lib/Firebase';
+import AdminLayout from '../../layouts/Admin';
+import { initializeApp } from '../../lib/Firebase';
 import './App.scss';
 
 const App = () => {
-  useEffect(() => {
-    // Initialize the firebase app
-    initializeApp();
-  }, []);
+  initializeApp();
 
   return (
     <Switch>
       <Route
-        path="/admin"
+        path="*"
         render={(props) => {
           return <AdminLayout {...props} />;
         }}
       />
-      <Redirect from="/" to="/admin/dashboard" />
+      <Redirect from="*" to="/login" />
     </Switch>
   );
 };

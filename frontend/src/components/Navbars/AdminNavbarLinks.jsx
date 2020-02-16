@@ -44,7 +44,7 @@ class AdminNavbarLinks extends Component {
             <MenuItem eventKey={2.5}>Separated link</MenuItem>
           </NavDropdown>
           <NavItem eventKey={3} href="#">
-            Log out
+            Logout
           </NavItem>
         </Nav>
       </div>
