@@ -199,25 +199,6 @@ h1 .subtitle {
   color: #ff9500 !important;
 }
 
-.text-red,
-.text-red:hover {
-  color: red !important;
-}
-
-.text-green,
-.text-green:hover {
-  color: green !important;
-}
-
-.text-orange,
-.text-orange:hover {
-  color: orange !important;
-}
-
-.text-yellow,
-.text-yellow:hover {
-  color: yellow !important;
-}
 .text-danger,
 .text-danger:hover {
   color: #ff4a55 !important;
