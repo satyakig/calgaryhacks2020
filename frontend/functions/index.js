@@ -14,6 +14,7 @@ const NEXT_WEEK = 'Next Week';
 const ASK_457 = 'Ask 457';
 const BUSIEST_WEEK = 'Busiest Week';
 const SAFEWALK = 'Safewalk';
+const MENTALHEALTH = 'MentalHealth';
 
 const app = dialogflow();
 
@@ -35,7 +36,6 @@ app.intent(NEXT_ASSIGN, (conv) => {
   firestore.collection('bot').add({ data: todo_list });
   conv.ask(todo_list);
 });
-
 app.intent(NEXT_WEEK, (conv) => {
   let todo_list =
     'Next week will be fairly busy for you. You have Midterm Exam for 418 and a Midterm Exam for CPSC355';
@@ -57,6 +57,12 @@ app.intent(BUSIEST_WEEK, (conv) => {
 app.intent(SAFEWALK, (conv) => {
   let todo_list =
     'Safewalks number is 403-220-5333 on 24 hours/seven days a week, 365 days a year!';
+  conv.ask(todo_list);
+});
+
+app.intent(MENTALHEALTH, (conv) => {
+  let todo_list =
+    'If you are stressed, please reach out to UofC Wellness Centre at 403-210-9355 or visit https://www.ucalgary.ca/wellness-services/services/mental-health-services.';
   conv.ask(todo_list);
 });
 
