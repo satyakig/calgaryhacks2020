@@ -3,12 +3,17 @@ const admin = require('firebase-admin');
 const { dialogflow } = require('actions-on-google');
 
 admin.initializeApp();
-
 const firestore = admin.firestore();
 
 const WELCOME_INTENT = 'Default Welcome Intent';
 const FALLBACK_INTENT = 'Default Fallback Intent';
-const NEED_QUOTE_INTENT = 'Generate TODO';
+const TODO = 'Generate TODO';
+const NEXT_ASSIGN = 'Next Assignment';
+const NEXT_WEEK = 'Next Week';
+const ASK_457 = 'Ask 457';
+const BUSIEST_WEEK = 'Busiest Week';
+const SAFEWALK = 'Safewalk';
+
 const app = dialogflow();
 
 app.intent(WELCOME_INTENT, (conv) => {
@@ -19,27 +24,38 @@ app.intent(FALLBACK_INTENT, (conv) => {
   conv.ask('Hello James');
 });
 
-app.intent(NEED_QUOTE_INTENT, (conv) => {
-  return firestore
-    .collection('courses')
-    .where('course', '==', 'CPSC441')
-    .get()
-    .then((snapshot) => {
-      if (snapshot.empty) {
-        console.log('No matching documents.');
-        return;
-      }
+app.intent(TODO, (conv) => {
+  let todo_list = ['CPSC418: Midterm Exam: 2 Hours', 'CPSC355: Midterm: 2 Hours'];
+  conv.ask('You should study for 2 hours for CPSC-559 today');
+});
 
-      snapshot.docs.forEach((doc) => {
-        console.log(doc.data());
-      });
+app.intent(NEXT_ASSIGN, (conv) => {
+  let todo_list = 'You have a Midterm Exam on Friday';
+  firestore.collection('bot').add({ data: todo_list });
+  conv.ask(todo_list);
+});
 
-      console.log(conv.arguments);
-      console.log(conv.body);
-      console.log(conv.contexts);
+app.intent(NEXT_WEEK, (conv) => {
+  let todo_list =
+    'Next week will be fairly busy for you. You have Midterm Exam for 418 and a Midterm Exam for CPSC355';
+  conv.ask(todo_list);
+});
 
-      conv.ask('James');
-    });
+app.intent(ASK_457, (conv) => {
+  let todo_list =
+    'It is an introduction to operating systems principles. Performance measurement; concurrent programs; the management of information, memory and processor resources.';
+  conv.ask(todo_list);
+});
+app.intent(BUSIEST_WEEK, (conv) => {
+  let todo_list =
+    'Your busiest week is from March 21 - March 28. You have 4 deliverables due for a total of 75 weight.';
+  conv.ask(todo_list);
+});
+
+app.intent(SAFEWALK, (conv) => {
+  let todo_list =
+    'Safewalks number is 403-220-5333 on 24 hours/seven days a week, 365 days a year!';
+  conv.ask(todo_list);
 });
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app);
