@@ -1,0 +1,60 @@
+Course,"(Delivarable, Date, Diffuculty (in hours), Weight)",Description,Lecture TImes,Tutorial Times
+GOPH375,"[(Term Test 1, 2020-02-13, 20h, 20%),  
+ (Term Test 2, 2020-03-26, 20h, 20%), 
+ (Final Exam, 2020-04-13, 30h, 40%)]","Causes of disasters such as earthquakes, tsunami, volcanic eruptions, mud flows, landslides, avalanches, flooding, tornadoes and hurricanes, and other critical phenomena such as sinkholes, ozone depletion and radiation, carbon dioxide and global warming, El Nino, toxic natural materials and pollution, and extraterrestrial impacts. Surveys of historic disasters and their effects on life on Earth. Methods of prediction and prevention of disasters and precautions for the mitigation of their effects.","[(Tuesday, 3:30pm - 4:45pm), 
+ (Thursday, 3:30pm - 4:45pm)]",N/A
+CPSC559,"[(Test 1, 2020-02-25, 25h, 15%),
+ (Test 2, 2020-03-10, 25h, 15%),
+ (Final Project, 2020-04-14, 100h, 40%)]","Designing and implementing distributed systems that overcome challenges due to concurrent computation, failure of components in the system and heterogeneity of processors and communication channels.","[(Tuesday, 9:30am - 10:45am), 
+ (Thursday, 9:30am - 10:45am)]",N/A
+CPSC441,"[(Midterm, 2020-03-04, 20h, 20%),
+(Assignment 1, 2020-02-07, 20h, 10%),
+(Assignment 2, 2020-02-28, 20h, 10%),
+(Assignment 3, 2020-03-20, 20h, 10%),
+(Assignment 4, 2020-04-03, 20h, 10%),
+(Final Exam, 2020-04-24, 40h, 40%)]","Principles and practice in modern telecommunications, computer communications and networks. Layered communication protocols and current physical, data link, network and internet protocol layers. Circuit switching, packet switching, and an introduction to broadband multimedia networking.","[(Monday, 12:00pm - 12:50pm),
+(Wednesday, 12:00pm - 12:50pm),
+(Friday, 12:00pm - 12:50pm)]","[(Monday, 4:00pm - 4:50pm),
+(Wednesday, 4:00pm - 4:50pm)]"
+CPSC457,"[(Midterm, 2020-03-04, 20h, 20%),
+(Assignment 1, 2020-01-31, 20h, 5%),
+(Assignment 2, 2020-02-18, 20h, 6%),
+(Assignment 3, 2020-03-13, 20h, 5%),
+(Assignment 4, 2020-03-27, 20h, 7%),
+(Assignment 4, 2020-04-17, 20h, 7%),
+(Final Exam, 2020-04-20, 40h, 40%)]","An introduction to operating systems principles. Performance measurement; concurrent programs; the management of information, memory and processor resources.","[(Tuesday, 9:30am - 10:45am), 
+ (Thursday, 9:30am - 10:45am)]","[(Monday, 9:00am - 9:50am),
+(Wednesday, 9:00am - 9:50am)]"
+CPSC565,"[(Assignment 1, 2020-02-07, 10h, 7.5%),
+(Assignment 2, 2020-03-06, 20h, 12.5%),
+(Assignment 3, 2020-04-03, 20h, 15%),
+(Final Exam, 2020-04-15, 20h, 15%)]","An insight into a new mindset for programming as an emergent and evolutionary process of ""breeding,"" rather than constructing. Programs can evolve to perform specific tasks in a bottom-up fashion rather than being manually coded. Topics will include: decentralized agent-based programming, massive parallelism and interaction, evolution, swarm intelligence.","[(Tuesday, 11:00am - 12:15pm), 
+ (Thursday, 11:00am - 12:15pm)]",N/A
+CPSC355,"[(Assignment 1, 2020-01-30, 15h, 7.5%),
+(Assignment 2, 2020-02-06, 15h, 12.5%),
+(Midterm, 2020-03-01, 30h, 30%),
+(Final Exam, 2020-04-25, 30h, 40%)]","An introduction to computing machinery establishing the connection between programs expressed in a compiled language, an assembly language, and machine code, and how such code is executed. Includes the detailed study of a modern CPU architecture, its assembly language and internal data representation, and the relationship between high-level program constructs and machine operations.","[(Monday, 11:00am - 12:00pm), 
+ (Wednesday, 11:00am - 12:00pm),
+ (Friday, 11:00am - 12:00pm)]",N/A
+CPSC409,"[(Exam 1, 2020-02-07, 15h, 25%),
+(Exam 2, 2020-03-17, 15h, 25%),
+(Exam 3, 2020-04-03, 15h, 25%),
+(Exam 4, 2020-04-18, 15h, 25%)]",The history of computation from the earliest times to the modern era.,"[(Monday, 2:15pm - 3:05pm), 
+ (Tuesday, 3:15pm - 4:05pm)]",N/A
+SENG513,"[(Assignment 1, 2020-01-28, 10h, 10%),
+(Assignment 2, 2020-02-14, 15h, 15%),
+(Assignment 3, 2020-03-01, 15h, 15%),
+(Project Proposal, 2020-02-18, 30h, 25%),
+(Presentation, 2020-04-16, 20h, 25%),
+(Final Exam, 2020-04-23, 20h, 10%)]",An overview of software engineering methods and technologies for developing web-based software systems.,"[(Tuesday, 12:30pm - 1:45pm), 
+ (Thursday,12:30pm - 1:45pm)]",N/A
+CPSC418,"[(Assignment 1, 2020-02-12, 25h, 10%),
+(Assignment 2, 2020-03-11, 25h, 10%),
+(Assignment 3, 2020-04-08, 25h, 10%),
+(Midterm Exam, 2020-02-20, 30h, 30%),
+(Final Exam, 2020-04-26, 40h, 40%)]","The basics of cryptography, with emphasis on attaining well-defined and practical notations of security. Symmetric and public key cryptosystems; one-way and trapdoor functions; mechanisms for data integrity; digital signatures; key management; applications to the design of cryptographic systems. In addition to written homework, assessment will involve application programming; additional mathematical theory and proof-oriented exercises will be available for extra credit.","[(Monday, 2:00pm - 2:50pm), 
+(Wednesday, 2:00pm - 2:50pm), 
+(Friday, 2:00pm - 2:50pm)]",N/A
+CPSC502,"[(Interim Report, 2020-01-24, 20h, 10%),
+ (Final Report, 2020-04-09, 40h, 30%),
+ (Final Presentation, 2020-04-17, 20h, 30%)]",A substantial research project under the guidance of a faculty member. A report must be written and presented on completion of the course.,N/A,N/A
