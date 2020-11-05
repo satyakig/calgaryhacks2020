@@ -10,7 +10,11 @@ export class UserCard extends Component {
         <div className="content">
           <div className="author">
             <span>
-              <img className="avatar border-gray" src={this.props.avatar} alt="Logo" />
+              <img
+                className="avatar border-gray"
+                src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/user.png"
+                alt="Logo"
+              />
               <h4 className="title">
                 {this.props.name}
                 <br />
