@@ -39,6 +39,7 @@ class Sidebar extends Component {
           <div className="sidebar-background" style={sidebarBackground} />
         ) : null}
         <div className="logo">
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a className="simple-text logo-mini">
             <div className="logo-img">
               <img src={logo} alt="logo_image" />

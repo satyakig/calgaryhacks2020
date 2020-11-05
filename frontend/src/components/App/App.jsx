@@ -94,8 +94,8 @@ const App = (props) => {
       <Switch>
         <Route
           path="*"
-          render={(props) => {
-            return <AdminLayout {...props} />;
+          render={(routeProps) => {
+            return <AdminLayout {...routeProps} />;
           }}
         />
       </Switch>

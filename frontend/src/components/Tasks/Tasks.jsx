@@ -20,14 +20,18 @@ export const Tasks = () => {
           const diff = now - start;
           const oneDay = 1000 * 60 * 60 * 24;
 
-          const d = result['todo_list'][Math.floor(diff / oneDay)].map((task) => {
-            return task
-              .split(': ')
-              .join(' - ')
-              .replace(' Hours', ' hrs');
-          });
+          const res = result['todo_list'][Math.floor(diff / oneDay)];
 
-          setDay(d);
+          if (res) {
+            const d = res.map((task) => {
+              return task
+                .split(': ')
+                .join(' - ')
+                .replace(' Hours', ' hrs');
+            });
+
+            setDay(d);
+          }
         });
     }
   }
