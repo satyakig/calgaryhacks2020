@@ -25,6 +25,6 @@ steps:
         "deploy",
         "--debug",
         "--token",
-        "1//06a0ASgdGRWuTCgYIARAAGAYSNwF-L9IrLih-cz2cb_XcnEgZHIn8PTiGT0v8cJMpWB2ugZ9EvTb9mtPjkbLOa3xAjRZknqiLlug",
+        "1//06uzfE8LaTFpkCgYIARAAGAYSNwF-L9Ir3UKhYZoF4r7O8X7vlR8dNa_xX2NRml4JYcW-uv2p2374xsBkYy7ArVJtCC1CRs13brs",
       ]
 timeout: "900s"
