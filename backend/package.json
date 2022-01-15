@@ -34,7 +34,7 @@
     "firebase-admin": "^8.9.2",
     "moment": "2.24.0",
     "morgan": "1.9.1",
-    "shelljs": "0.8.3",
+    "shelljs": "0.8.5",
     "uuid": "3.4.0"
   },
   "devDependencies": {
