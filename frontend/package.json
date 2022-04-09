@@ -58,7 +58,7 @@
     "firebase": "7.8.2",
     "firebaseui": "4.4.0",
     "fullcalendar": "3.10.1",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "node-sass": "4.13.1",
     "prop-types": "15.7.2",
     "react": "16.12.0",
